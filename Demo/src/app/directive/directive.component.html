@@ -1,0 +1,14 @@
+<h2 class="text-primary">Custom Directive Works!</h2>
+<br><br>
+<h4>Pick a highlight color</h4>
+<div>
+  <input type="radio" name="colors" (click)="color='lightgreen'"><i>&nbsp;Green &nbsp;
+  <input type="radio" name="colors" (click)="color='yellow'">&nbsp;Yellow&nbsp;
+  <input type="radio" name="colors" (click)="color='hotpink'">&nbsp;Hotpink</i>
+  <!-- <input type="radio" name="colors" (click)="mouseClick($event)">&nbsp;Click</i> -->
+</div>
+
+<p class="mt-4" style="width: 500px;" [appHighlight]="color">Hover the Mouse, <br>This text will Highlight!</p>
+<br><br>
+
+<h6 ngNonBindable>This should not evaluate: {{ 45411 * 45 }}</h6>

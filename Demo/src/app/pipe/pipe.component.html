@@ -1,0 +1,15 @@
+<h4 class="text-primary">Using Pipe</h4>
+
+<p class="mt-3 fw-semibold">My Birthday is <i>(default)</i> :- {{ birthday | date}}</p>
+
+<p class="mt-3 fw-semibold">My Birthday is <i>(using dd/mm/yyyy)</i> :- {{ birthday | date : "dd/MM/yyyy"}}</p>
+
+<p class="mt-3 fw-semibold">My Birthday is <i>(using pipe chaining)</i> :- {{ birthday | date : "fullDate" | uppercase}}</p>
+
+<p class="mt-3 fw-semibold">Your Balance is <i>(using currency)</i> :- {{ balance | currency}}</p>
+
+
+<h4 class="mt-5 text-primary">Custom Pipe</h4>
+
+<input type="number" [(ngModel)]="number" id="cube" class="mt-3" placeholder="Enter value" min="0" oninput="validity.valid||(value='')">
+<p class="mt-3 fw-semibold"> Cube of {{number ? number : 0}} is <i>(custom pipe)</i> :- {{ number | cube}}</p>

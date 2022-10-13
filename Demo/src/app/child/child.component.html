@@ -1,0 +1,13 @@
+<div class="border p-3 border-3 border-success">
+    <h5>This is Child Component</h5>
+    <p>
+        {{pname}}
+    </p>
+    <p>Count :- {{count}}</p>
+    <br />
+    <button class="btn btn-primary" (click)="func()">Click</button>
+    <button class="btn btn-success ms-3" (click)="addCnt(+1)">Count +</button>
+    <button class="btn btn-danger ms-3" (click)="addCnt(-1)">Count -</button>
+    <button class="btn btn-secondary ms-3" (click)="reset()">Reset</button>
+
+</div>

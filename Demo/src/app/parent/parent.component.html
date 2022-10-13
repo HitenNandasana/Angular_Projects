@@ -1,0 +1,15 @@
+<h5>This is Parent Component</h5>
+<p>
+    {{pdata}}
+</p>
+<p>
+    {{message}}
+</p>
+<span>Count :- {{addCount}}</span>
+<p>
+    <button class="btn btn-success mt-3" (click)="this.child.addCnt(+1)">Count +</button>
+    <button class="btn btn-danger ms-3 mt-3" (click)="this.child.addCnt(-1)">Count -</button>
+    <button class="btn btn-secondary ms-3 mt-3" (click)="this.child.reset()">Reset</button>
+</p>
+
+<app-child [pname]="name" (childData)="pdata=($event)" [(count)]="addCount"></app-child>

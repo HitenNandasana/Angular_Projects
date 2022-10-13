@@ -1,0 +1,23 @@
+<div class="home-ad">
+    <h1 class="m-3">{{title | uppercase}}</h1>
+    <p class="m-3">{{699 | currency}}</p>
+    <button class="btn btn-primary m-3" (click)="clickFun()">Click</button>
+    Months:
+    <select name="months" id="" (change)="changeMonth()">
+        <option value="" *ngFor="let i of months">
+            {{i}}
+        </option>
+    </select>
+</div>
+
+<ng-container *ngIf="isValid; then con"></ng-container>
+<ng-template #con>
+    <p class="mt-3 fw-bold">
+        Use of ng-container and ng-template
+    </p>
+    <p class="mt-3">
+        What you can do with this Toggle?
+    </p>
+</ng-template>
+<button class="btn btn-success mt-3" (click)="toggle()">{{content}} Content</button>
+

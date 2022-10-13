@@ -1,0 +1,5 @@
+#cube::-webkit-outer-spin-button,
+#cube::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

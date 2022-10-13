@@ -1,0 +1,12 @@
+<div class="row mt-3">
+    <div class="card col-md-6 mt-2" *ngFor="let item of empdata">
+        <div class="card-header">
+            Employee
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{item.name}}</h5>
+            <p class="card-text">{{item.designation}}</p>
+            <a class="btn btn-primary btn-sm" (click)="goToEmpDetails(item.id)">More Details &rarr;</a>
+        </div>
+    </div>
+</div>

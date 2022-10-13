@@ -1,0 +1,42 @@
+ [
+    {
+      "id": 1,
+      "name": "hiten",
+      "designation": "angular",
+      "email": "abc@gmail.com",
+      "bloodGroup": "+ve",
+      "phone": 1234567890
+    },
+    {
+      "id": 2,
+      "name": "sagar",
+      "designation": "angular1",
+      "email": "ab1c@gmail.com",
+      "bloodGroup": "+ve",
+      "phone": 1234567890
+    },
+    {
+      "id": 3,
+      "name": "smit",
+      "designation": "angular3",
+      "email": "ab34c@gmail.com",
+      "bloodGroup": "+ve",
+      "phone": 1234567890
+    },
+    {
+      "id": 4,
+      "name": "parth",
+      "designation": "react js",
+      "email": "ab234fgc@gmail.com",
+      "bloodGroup": "+ve",
+      "phone": 133457686
+    },
+    {
+      "id": 5,
+      "name": "dggd",
+      "designation": "angulardf",
+      "email": "abdc@gmail.com",
+      "bloodGroup": "+ve",
+      "phone": 1234567890
+    }
+  ]

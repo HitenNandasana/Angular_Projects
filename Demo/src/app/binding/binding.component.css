@@ -1,0 +1,14 @@
+td{
+    border: 2px solid hotpink;
+}
+.cls{
+    border: 3px solid green;
+    padding: 15px;
+    font-size: large;
+}
+.mul1{
+    color: hotpink;
+    margin-top: 10px;
+    font-size: small;
+    width: 600px;
+}
