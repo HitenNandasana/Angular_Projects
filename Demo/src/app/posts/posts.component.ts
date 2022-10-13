@@ -27,6 +27,7 @@ export class PostsComponent implements OnInit {
     // this.postservice.deleteposts(id)
     //   .subscribe(res => console.log(res));
     this.postdata.splice(id, 1);
+    console.log(id);
   }
 
 }
