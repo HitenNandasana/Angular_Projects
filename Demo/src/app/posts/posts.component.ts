@@ -31,7 +31,7 @@ export class PostsComponent implements OnInit {
     console.log("hiten");
     console.log("sagar");
     console.log("sagarfdf");
-    console.lof("{check");
+    console.log("{check");
     console.log("abc");
   }
 
