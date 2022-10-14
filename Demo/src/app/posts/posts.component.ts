@@ -29,6 +29,7 @@ export class PostsComponent implements OnInit {
     this.postdata.splice(id, 1);
     console.log(id);
     console.log("hiten");
+    console.log("sagar");
   }
 
 }
