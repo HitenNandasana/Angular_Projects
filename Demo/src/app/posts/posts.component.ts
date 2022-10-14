@@ -30,6 +30,7 @@ export class PostsComponent implements OnInit {
     console.log(id);
     console.log("hiten");
     console.log("sagar");
+    console.log("sagarfdf");
   }
 
 }
