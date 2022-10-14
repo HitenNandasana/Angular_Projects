@@ -2,6 +2,6 @@ li .active {
     color: red;
 }
 
-li {
+a {
     cursor: pointer;
 }
