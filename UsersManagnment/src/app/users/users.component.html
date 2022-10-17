@@ -1,0 +1,25 @@
+<div class="p-4">
+    <h1>Users</h1>
+    <button class="btn btn-success btn-sm" type="button" (click)="addUser()">Add User</button>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Username</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of userdata; let i = index;">
+                <td>{{item.fname}}</td>
+                <td>{{item.lname}}</td>
+                <td>{{item.uname}}</td>
+                <td class="butn">
+                    <button class="btn btn-primary btn-sm" type="button" (click)="editUser(i)">Edit</button>
+                    <button class="btn btn-danger btn-sm ms-1" type="button" (click)="deleteUser(i)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,11 @@
+.navbar-nav .nav-item a {
+    color: gray;
+}
+
+.navbar-nav .nav-item a.active {
+    color: white;
+}
+
+a {
+    cursor: pointer;
+}

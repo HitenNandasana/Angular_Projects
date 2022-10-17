@@ -28,11 +28,6 @@ export class PostsComponent implements OnInit {
     //   .subscribe(res => console.log(res));
     this.postdata.splice(id, 1);
     console.log(id);
-    console.log("hiten");
-    console.log("sagar");
-    console.log("sagarfdf");
-    console.log("{check");
-    console.log("abc");
   }
 
 }

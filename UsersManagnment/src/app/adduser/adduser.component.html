@@ -1,0 +1,29 @@
+<div class="p-4">
+    <h1>{{editMode === 'true' ? 'Edit' : 'Add'}} User</h1>
+    <form class="row g-3 needs-validation" #addUserForm="ngForm" (ngSubmit)="save(addUserForm.value)">
+        <!-- <div class="col-12">
+            <input type="hidden" class="form-control" id="id" name="id" required [(ngModel)]="id">
+        </div> -->
+        <div class="col-md-6">
+            <label for="fname" class="form-label">First name</label>
+            <input type="text" class="form-control" id="fname" name="fname" value="" required ngModel>
+        </div>
+        <div class="col-md-6">
+            <label for="lname" class="form-label">Last name</label>
+            <input type="text" class="form-control" id="lname" name="lname" value="" required ngModel>
+        </div>
+        <div class="col-md-6">
+            <label for="uname" class="form-label">Username</label>
+            <input type="text" class="form-control" id="uname" name="uname" value="" required ngModel>
+        </div>
+        <div class="col-md-6">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" value="" required ngModel>
+        </div>
+        <div class="col-12 d-flex align-items-center">
+            <button class="btn btn-primary" type="submit">Save</button>
+            <a [routerLink]="['/users']" routerLinkActive="router-link-active"
+                class="text-decoration-none ms-3">Cancel</a>
+        </div>
+    </form>
+</div>
