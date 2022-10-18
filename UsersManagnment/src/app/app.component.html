@@ -7,8 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item" *ngFor="let item of navList">
-          <a class="nav-link" (click)="redirect(item.routeLink,item.name)"
-            [ngClass]="{active: isActive(item.name)}">{{item.name}}</a>
+          <a class="nav-link" [routerLink]="[item.routeLink]" routerLinkActive="router-link-active">{{item.name}}</a>
         </li>
       </ul>
     </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
 import { DesignUtilityService } from '../design-utility.service';
 
@@ -13,11 +14,8 @@ export class UsersComponent implements OnInit {
   userdata: any = [];
   editMode: any;
 
-  constructor(private route: Router, private designUtility: DesignUtilityService) {
+  constructor(private route: Router, private designUtility: DesignUtilityService, private toastr: ToastrService) {
     this.getData();
-    // this.designUtility.editMode.subscribe(res => {
-    //   this.editMode = res;
-    // })
   }
 
   ngOnInit(): void {
@@ -40,15 +38,19 @@ export class UsersComponent implements OnInit {
     this.route.navigate(['users/add']);
   }
 
-  editUser(id: any) {
+  editUser(user: any) {
     this.designUtility.editMode.next(true);
-    this.route.navigate(['users/edit'], { queryParams: { id } });
+    this.designUtility.user.next(user);
+    this.route.navigate(['users/edit', user.id]);
   }
 
   deleteUser(id: any) {
     let data = JSON.parse(localStorage.getItem('userList') || '');
-    data.splice(id, 1);
-    localStorage.setItem('userList', JSON.stringify(data));
-    this.getData();
+    if (confirm('Do you really want to delete this?')) {
+      data.splice(id, 1);
+      localStorage.setItem('userList', JSON.stringify(data));
+      this.toastr.success('User Deleted Successfully!')
+      this.getData();
+    }
   }
 }

@@ -9,7 +9,9 @@ const routes: Routes = [
   { path: 'home', title: 'Home', component: HomeComponent },
   { path: 'users', title: 'Users', component: UsersComponent },
   { path: 'users/add', title: 'Add User', component: AdduserComponent },
-  { path: 'users/edit', title: 'Edit User', component: AdduserComponent },
+  { path: 'users/edit/:id', title: 'Edit User', component: AdduserComponent },
+  { path: 'logout', title: 'Logout', component: HomeComponent },
+  { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({

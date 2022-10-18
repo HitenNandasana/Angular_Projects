@@ -12,11 +12,11 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of userdata; let i = index;">
-                <td>{{item.fname}}</td>
-                <td>{{item.lname}}</td>
-                <td>{{item.uname}}</td>
+                <td>{{item.firstname}}</td>
+                <td>{{item.lastname}}</td>
+                <td>{{item.username}}</td>
                 <td class="butn">
-                    <button class="btn btn-primary btn-sm" type="button" (click)="editUser(i)">Edit</button>
+                    <button class="btn btn-primary btn-sm" type="button" (click)="editUser(item)">Edit</button>
                     <button class="btn btn-danger btn-sm ms-1" type="button" (click)="deleteUser(i)">Delete</button>
                 </td>
             </tr>

@@ -1,11 +1,12 @@
-.navbar-nav .nav-item a {
-    color: gray;
-}
+ a {
+     color: gray;
+     cursor: pointer;
+ }
 
-.navbar-nav .nav-item a.active {
-    color: white;
-}
+ .router-link-active {
+     color: white;
+ }
 
-a {
-    cursor: pointer;
-}
+ a:hover {
+     color: gray;
+ }

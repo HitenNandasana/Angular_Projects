@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class DesignUtilityService {
 
   editMode = new BehaviorSubject<boolean>(false);
-  id = new BehaviorSubject<any>(1);
+  user = new BehaviorSubject<any>('');
 
   constructor() { }
 }
