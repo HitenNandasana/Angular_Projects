@@ -10,3 +10,7 @@
  a:hover {
      color: gray;
  }
+
+ :not(.router-link-active) a:hover {
+     color: white;
+ }

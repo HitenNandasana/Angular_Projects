@@ -21,6 +21,10 @@ export class AppComponent {
     {
       routeLink: '/logout',
       name: 'Logout'
+    },
+    {
+      routeLink: '/login',
+      name: 'Login'
     }
   ]
   selected: any;

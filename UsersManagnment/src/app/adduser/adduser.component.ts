@@ -13,6 +13,7 @@ export class AdduserComponent implements OnInit {
   editMode: any;
   id: any;
   userdata: any;
+  loginUserObj: any;
 
   constructor(private route: Router, private designUtility: DesignUtilityService, private toastr: ToastrService, private activateRoute: ActivatedRoute) {
     this.designUtility.editMode.subscribe(res => {
@@ -20,6 +21,9 @@ export class AdduserComponent implements OnInit {
     })
     this.designUtility.user.subscribe(res => {
       this.userdata = res;
+    })
+    this.designUtility.loginUser.subscribe(res => {
+      this.loginUserObj = res;
     })
   }
 
@@ -49,7 +53,7 @@ export class AdduserComponent implements OnInit {
       } else {
         const newArr = data.map((obj: any) => {
           if (obj.id === this.userdata.id) {
-            console.log(this.userdata.id);
+            // console.log(this.userdata.id);
             return { ...obj, firstname: addUserForm.value.fname, lastname: addUserForm.value.lname, username: addUserForm.value.uname, password: addUserForm.value.password };
           }
           return obj;
@@ -60,4 +64,9 @@ export class AdduserComponent implements OnInit {
       this.route.navigate(['/users']);
     }
   }
+
+  add(addUserForm: NgForm) {
+
+  }
+
 }

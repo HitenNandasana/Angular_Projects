@@ -1,0 +1,43 @@
+<div class="p-4">
+    <h1>Login</h1>
+    <hr>
+    <form class="mt-3" [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="mb-3 form-group"
+            [ngClass]="{'hasError': loginForm.get('uname').invalid && (loginForm.get('uname').touched || loginForm.get('uname').dirty || temp) ,'hasSuccess': loginForm.get('uname').valid && (loginForm.get('uname').touched || loginForm.get('uname').dirty) }">
+            <label for="uname" class="form-label required">Username</label>
+            <input type="text" class="form-control" name="uname" id="uname" formControlName="uname"
+                (keydown)="onkeydown()">
+            <ng-container *ngIf="loginForm.invalid && temp || loginForm.invalid && loginForm.get('uname').touched">
+                <small class="text-danger" *ngIf="loginForm.get('uname').invalid">Username is Required.</small>
+            </ng-container>
+        </div>
+
+        <div class="mb-3 form-group"
+            [ngClass]="{'hasError': loginForm.get('password').invalid && (loginForm.get('password').touched || loginForm.get('password').dirty || temp) ,'hasSuccess': loginForm.get('password').valid && (loginForm.get('password').touched || loginForm.get('password').dirty) }">
+            <label for="password" class="form-label required">Password</label>
+            <input type="password" class="form-control" name="password" id="password" formControlName="password"
+                (keydown)="onkeydown()">
+            <ng-container *ngIf="loginForm.invalid && temp || loginForm.invalid && loginForm.get('password').touched">
+                <small class="text-danger" *ngIf="loginForm.get('password').errors?.['required']">Password is
+                    Required. </small>
+                <small class="text-danger"
+                    *ngIf="loginForm.get('password').dirty && loginForm.get('password').errors?.['pattern']">Password
+                    must
+                    contain at least one Uppercase latter, one Lowercase letter, one Digit and one Special
+                    charactor.</small>
+            </ng-container>
+        </div>
+
+        <div *ngIf="loginCheckMessage" class="mb-3">
+            <small class="text-danger">Username or Password
+                is invalid. </small>
+        </div>
+
+        <div class="col-12 d-flex align-items-center">
+            <button type="submit" class="btn btn-primary">Login</button>
+            <a [routerLink]="['/register']" routerLinkActive="router-link-active"
+                class="text-decoration-none ms-3">Register</a>
+        </div>
+    </form>
+    <hr>
+</div>

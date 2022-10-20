@@ -8,7 +8,7 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Valida
 })
 export class ReactiveformComponent implements OnInit {
 
-  myReactiveForm: FormGroup | any;
+  myReactiveForm: FormBuilder | any;
   value: any;
   submitted = false;
   temp = false;
@@ -25,7 +25,7 @@ export class ReactiveformComponent implements OnInit {
       'city': ['', Validators.required],
       'languages': this.fb.array([
         ['', Validators.required]
-      ])  
+      ])
     }, { validators: this.passwordMatchValidator });
   }
   onSubmit() {
@@ -61,7 +61,6 @@ export class ReactiveformComponent implements OnInit {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-
       return false;
     }
     return true;

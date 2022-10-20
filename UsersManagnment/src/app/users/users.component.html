@@ -8,6 +8,7 @@
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Username</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -15,11 +16,12 @@
                 <td>{{item.firstname}}</td>
                 <td>{{item.lastname}}</td>
                 <td>{{item.username}}</td>
-                <td class="butn">
+                <td>
                     <button class="btn btn-primary btn-sm" type="button" (click)="editUser(item)">Edit</button>
                     <button class="btn btn-danger btn-sm ms-1" type="button" (click)="deleteUser(i)">Delete</button>
                 </td>
             </tr>
         </tbody>
     </table>
+    <h5 *ngIf="userdata.length === 0" class="text-center text-danger">No Record Found</h5>
 </div>
