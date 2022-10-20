@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DesignUtilityService } from './design-utility.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'UsersManagnment';
+  checkLoggedIn = new Boolean;
 
   navList = [
     {
@@ -17,19 +19,25 @@ export class AppComponent {
     {
       routeLink: '/users',
       name: 'Users'
-    },
-    {
-      routeLink: '/logout',
-      name: 'Logout'
-    },
-    {
-      routeLink: '/login',
-      name: 'Login'
     }
   ]
   selected: any;
+  loginName: string = '';
+  constructor(private route: Router, private designUtility: DesignUtilityService) {
 
-  constructor(private route: Router) {
+    this.designUtility.loggedIn.subscribe(res => {
+      this.checkLoggedIn = res;
+    })
+  }
+  ngOnInit(): void {
 
+    this.designUtility.autoLogin();
+  }
+  logInOut() {
+    if (this.checkLoggedIn) {
+      this.loginName = 'Logout';
+    } else {
+      this.loginName = 'Login';
+    }
   }
 }

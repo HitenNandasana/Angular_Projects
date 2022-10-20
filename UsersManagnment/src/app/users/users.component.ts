@@ -13,6 +13,8 @@ export class UsersComponent implements OnInit {
 
   userdata: any = [];
   editMode: any;
+  loginUserObjArr: any = [];
+  loginUserObj: any = [];
 
   constructor(private route: Router, private designUtility: DesignUtilityService, private toastr: ToastrService) {
     this.getData();
@@ -22,15 +24,10 @@ export class UsersComponent implements OnInit {
   }
 
   getData() {
-    if (localStorage.getItem('userList') === null || localStorage.getItem('userList') == undefined) {
-      let userList: any = [];
-
-      localStorage.setItem('userList', JSON.stringify(userList));
-      return;
-    } else {
-      this.userdata = JSON.parse(localStorage.getItem('userList') || '');
-      return this.userdata;
-    }
+    this.designUtility.loginUser.subscribe(res => {
+      this.loginUserObj = res;
+    })
+    this.loginUserObjArr = this.loginUserObj.userList;
   }
 
   addUser() {
@@ -44,11 +41,20 @@ export class UsersComponent implements OnInit {
     this.route.navigate(['users/edit', user.id]);
   }
 
-  deleteUser(id: any) {
-    let data = JSON.parse(localStorage.getItem('userList') || '');
+  deleteUser(index: any) {
+    let data = this.designUtility.getRegisterData()
     if (confirm('Do you really want to delete this?')) {
-      data.splice(id, 1);
-      localStorage.setItem('userList', JSON.stringify(data));
+      this.loginUserObjArr.splice(index, 1);
+      this.designUtility.loginUser.next(this.loginUserObj);
+
+      const arr = data.map((obj: any) => {
+        if (obj.id === this.loginUserObj.id) {
+          return { ...obj, userList: this.loginUserObjArr }
+        }
+        return obj;
+      })
+      this.designUtility.setRegisterData(arr);
+      this.designUtility.setLoginData(this.loginUserObj);
       this.toastr.success('User Deleted Successfully!')
       this.getData();
     }

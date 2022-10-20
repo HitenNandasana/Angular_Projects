@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { DesignUtilityService } from '../design-utility.service';
 
 @Component({
   selector: 'app-register',
@@ -15,11 +16,11 @@ export class RegisterComponent implements OnInit {
   id: any;
   arr: any = [];
 
-  constructor(private fb: FormBuilder, private toastr: ToastrService, private route: Router) {
+  constructor(private fb: FormBuilder, private toastr: ToastrService, private route: Router, private designUtility: DesignUtilityService) {
     if (localStorage.getItem('register') === null || localStorage.getItem('register') == undefined) {
       let userList: any = [];
 
-      localStorage.setItem('register', JSON.stringify(userList));
+      this.designUtility.setRegisterData(userList);
       return;
     }
   }

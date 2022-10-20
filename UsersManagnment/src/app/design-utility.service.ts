@@ -9,6 +9,7 @@ export class DesignUtilityService {
   editMode = new BehaviorSubject<boolean>(false);
   user = new BehaviorSubject<any>('');
   loginUser = new BehaviorSubject<any>('');
+  loggedIn = new BehaviorSubject<boolean>(false);
 
 
   constructor() { }
@@ -19,12 +20,42 @@ export class DesignUtilityService {
     if (userObj !== undefined) {
       if (userObj.password === form.value.password) {
         this.loginUser.next(userObj);
+        this.loggedIn.next(true);
         return true;
       } else {
         return false;
       }
     } else {
       return false;
+    }
+  }
+
+  getRegisterData() {
+    let data = JSON.parse(localStorage.getItem('register') || '');
+    return data;
+  }
+  setRegisterData(data: any) {
+    localStorage.setItem('register', JSON.stringify(data));
+  }
+
+  getLoginData() {
+    let data = localStorage.getItem('login');
+    if (data) {
+      return JSON.parse(data);
+    } else {
+      return false;
+    }
+  }
+  setLoginData(data: any) {
+    localStorage.setItem('login', JSON.stringify(data));
+  }
+
+  autoLogin() {
+    let data = this.getLoginData();
+    if (data) {
+      this.loginUser.next(data);
+    } else {
+      return;
     }
   }
 }

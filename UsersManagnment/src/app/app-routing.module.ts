@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'users', title: 'Users', component: UsersComponent },
   { path: 'users/add', title: 'Add User', component: AdduserComponent },
   { path: 'users/edit/:id', title: 'Edit User', component: AdduserComponent },
-  { path: 'logout', title: 'Logout', component: HomeComponent },
+  // { path: 'logout', title: 'Logout', component: HomeComponent },
   { path: 'login', title: 'Login', component: LoginComponent },
   { path: 'register', title: 'Register', component: RegisterComponent },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },

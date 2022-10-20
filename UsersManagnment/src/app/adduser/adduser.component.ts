@@ -31,13 +31,14 @@ export class AdduserComponent implements OnInit {
   }
 
   save(addUserForm: NgForm) {
-    if (addUserForm.valid === true) {
-      let data = JSON.parse(localStorage.getItem('userList') || '');
+    if (addUserForm) {
+      let data = this.designUtility.getRegisterData();
+      const userArr = this.loginUserObj.userList;
       if (!this.editMode) {
-        if (Object.keys(data).length === 0) {
+        if (Object.keys(userArr).length === 0) {
           this.id = 1;
         } else {
-          this.id = Math.max(...data.map((user: any) => user.id)) + 1;
+          this.id = Math.max(...userArr.map((user: any) => user.id)) + 1;
         }
         let obj = {
           id: this.id,
@@ -46,27 +47,51 @@ export class AdduserComponent implements OnInit {
           username: addUserForm.value.uname.replace(/\s+/g, ' ').trim(),
           password: addUserForm.value.password.replace(/\s+/g, ' ').trim()
         }
-        data.push(obj);
-        localStorage.setItem('userList', JSON.stringify(data));
-        this.toastr.success('User added Successfully!');
+        userArr.push(obj);
+        this.designUtility.user.next(this.loginUserObj);
 
-      } else {
         const newArr = data.map((obj: any) => {
+          if (obj.id === this.loginUserObj.id) {
+            return { ...obj, userList: userArr }
+          }
+          return obj;
+        })
+
+        this.designUtility.setRegisterData(newArr);
+        this.designUtility.setLoginData(this.loginUserObj);
+        this.toastr.success('User added Successfully!', 'Success!');
+      } else {
+
+        console.log("else edit");
+        const newArr = userArr.map((obj: any) => {
           if (obj.id === this.userdata.id) {
-            // console.log(this.userdata.id);
-            return { ...obj, firstname: addUserForm.value.fname, lastname: addUserForm.value.lname, username: addUserForm.value.uname, password: addUserForm.value.password };
+
+            this.userdata.firstname = addUserForm.value.fname;
+            this.userdata.lastname = addUserForm.value.lname;
+            this.userdata.username = addUserForm.value.uname;
+            this.userdata.password = addUserForm.value.password;
+
+            return this.userdata;
           }
           return obj;
         });
-        localStorage.setItem('userList', JSON.stringify(newArr));
+
+        const arr = data.map((obj: any) => {
+          if (obj.id === this.loginUserObj.id) {
+            return { ...obj, userList: newArr }
+          }
+          return obj;
+        })
+        this.designUtility.setRegisterData(arr);
+        this.designUtility.setLoginData(this.loginUserObj);
         this.toastr.success('User Updated Successfully!', 'Success!');
+
       }
+
+
       this.route.navigate(['/users']);
+
     }
-  }
-
-  add(addUserForm: NgForm) {
-
   }
 
 }

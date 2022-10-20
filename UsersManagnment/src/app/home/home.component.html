@@ -1,5 +1,5 @@
 <div class="p-4" style="height: 350px;">
-    <h1>Hi {{loginUserObj.length === undefined ? loginUserObj.username : 'Guest'}}!</h1>
+    <h1>Hi {{loginUserObj.length === undefined ? loginUserObj.firstname : 'Guest'}}!</h1>
     <p>You`re logged in with Angular 22!!</p>
     <a [routerLink]="['/users']" routerLinkActive="router-link-active" class="text-decoration-none">Manage Users</a>
 </div>

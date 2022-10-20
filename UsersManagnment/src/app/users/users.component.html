@@ -12,7 +12,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of userdata; let i = index;">
+            <tr *ngFor="let item of loginUserObjArr; let i = index;">
                 <td>{{item.firstname}}</td>
                 <td>{{item.lastname}}</td>
                 <td>{{item.username}}</td>
@@ -23,5 +23,6 @@
             </tr>
         </tbody>
     </table>
-    <h5 *ngIf="userdata.length === 0" class="text-center text-danger">No Record Found</h5>
+    <h5 *ngIf="loginUserObjArr === undefined || loginUserObjArr.length === 0" class="text-center text-danger">No Record
+        Found</h5>
 </div>
