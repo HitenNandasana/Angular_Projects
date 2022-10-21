@@ -9,7 +9,7 @@ export class DesignUtilityService {
   editMode = new BehaviorSubject<boolean>(false);
   user = new BehaviorSubject<any>('');
   loginUser = new BehaviorSubject<any>('');
-  loggedIn = new BehaviorSubject<boolean>(false);
+  loggedIn = new BehaviorSubject<any>('');
 
 
   constructor() { }
@@ -20,7 +20,7 @@ export class DesignUtilityService {
     if (userObj !== undefined) {
       if (userObj.password === form.value.password) {
         this.loginUser.next(userObj);
-        this.loggedIn.next(true);
+        this.loggedIn.next('Logout');
         return true;
       } else {
         return false;
@@ -54,7 +54,9 @@ export class DesignUtilityService {
     let data = this.getLoginData();
     if (data) {
       this.loginUser.next(data);
+      this.loggedIn.next('Logout');
     } else {
+      this.loggedIn.next('Login');
       return;
     }
   }

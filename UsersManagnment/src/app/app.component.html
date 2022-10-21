@@ -10,8 +10,7 @@
           <a class="nav-link" [routerLink]="[item.routeLink]" routerLinkActive="router-link-active">{{item.name}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/login']" routerLinkActive="router-link-active"
-            (click)="logInOut()">{{this.loginName}}</a>
+          <a class="nav-link" routerLinkActive="router-link-active" (click)="logInOut()">{{loginName}}</a>
         </li>
       </ul>
     </div>

@@ -9,7 +9,6 @@ import { DesignUtilityService } from './design-utility.service';
 })
 export class AppComponent implements OnInit {
   title = 'UsersManagnment';
-  checkLoggedIn = new Boolean;
 
   navList = [
     {
@@ -20,13 +19,17 @@ export class AppComponent implements OnInit {
       routeLink: '/users',
       name: 'Users'
     }
+    // {
+    //   routeLink: '/logout',
+    //   name: 'Logout'
+    // }
   ]
   selected: any;
   loginName: string = '';
   constructor(private route: Router, private designUtility: DesignUtilityService) {
 
     this.designUtility.loggedIn.subscribe(res => {
-      this.checkLoggedIn = res;
+      this.loginName = res;
     })
   }
   ngOnInit(): void {
@@ -34,10 +37,14 @@ export class AppComponent implements OnInit {
     this.designUtility.autoLogin();
   }
   logInOut() {
-    if (this.checkLoggedIn) {
-      this.loginName = 'Logout';
+    if (this.loginName === 'Login') {
+      this.route.navigate(['/login']);
     } else {
+      localStorage.removeItem('login');
+      this.designUtility.loginUser.next('');
       this.loginName = 'Login';
+      this.route.navigate(['/login']);
+
     }
   }
 }
