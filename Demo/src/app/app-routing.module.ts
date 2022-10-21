@@ -10,13 +10,13 @@ import { ElementComponent } from './element/element.component';
 import { FormComponent } from './form/form.component';
 import { HomeComponent } from './home/home.component';
 import { ImagesComponent } from './images/images.component';
+import { LocalstorageComponent } from './localstorage/localstorage.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ParentComponent } from './parent/parent.component';
 import { PipeComponent } from './pipe/pipe.component';
 import { PostsComponent } from './posts/posts.component';
 import { ReactiveformComponent } from './reactiveform/reactiveform.component';
-import { EmpDetailsComponent } from './routing/emp-details/emp-details.component';
-import { RoutingComponent } from './routing/routing.component';
+import { SubjectComponent } from './subject/subject.component';
 import { SvgComponent } from './svg/svg.component';
 
 const routes: Routes = [
@@ -32,11 +32,13 @@ const routes: Routes = [
   { path: 'directive', title: 'Directive', component: DirectiveComponent },
   { path: 'image', title: 'Image', component: ImagesComponent },
   { path: 'debug', title: 'Debug', component: DebugComponent },
-  { path: 'route', title: 'Routing', data: { preload: true }, loadChildren: () => import('./routing/routing.module').then(m => m.RoutingModule) },
+  { path: 'route', data: { preload: true }, loadChildren: () => import('./routing/routing.module').then(m => m.RoutingModule) },
   // { path: 'empDetail', title: 'Details', component: EmpDetailsComponent },
   { path: 'form', title: 'Form', component: FormComponent },
   { path: 'reactiveform', title: 'Reactive Form', component: ReactiveformComponent },
   { path: 'posts', title: 'Posts', component: PostsComponent },
+  { path: 'subject', title: 'Subject', component: SubjectComponent },
+  { path: 'storage', title: 'Localstorage', component: LocalstorageComponent },
   { path: '**', component: PagenotfoundComponent }
 ];
 

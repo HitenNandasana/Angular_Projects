@@ -1,0 +1,16 @@
+ a {
+     color: gray;
+     cursor: pointer;
+ }
+
+ .router-link-active {
+     color: white;
+ }
+
+ a:hover {
+     color: gray;
+ }
+
+ :not(.router-link-active) a:hover {
+     color: white;
+ }

@@ -1,0 +1,26 @@
+<form #myform="ngForm">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" name="name" ngModel>
+    </div>
+    <div class="mb-3">
+        <label for="age" class="form-label">Age</label>
+        <input type="number" class="form-control" id="age" name="age" ngModel>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="save(myform)">Submit</button>
+</form>
+<br>
+<hr>
+<h2>Get Data</h2>
+<form #getform="ngForm">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" name="name" ngModel>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="get(getform)">Submit</button>
+    <div *ngIf="submit">
+        <br>
+        Name :- {{temp1.name}} <br>
+        Age :- {{temp1.age}}
+    </div>
+</form>

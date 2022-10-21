@@ -36,6 +36,11 @@ import { FormComponent } from './form/form.component';
 import { ReactiveformComponent } from './reactiveform/reactiveform.component';
 import { PasswordValidateDirective } from './form/password-validate.directive';
 import { PostsComponent } from './posts/posts.component';
+import { SubjectComponent } from './subject/subject.component';
+import { Comp1Component } from './comp1/comp1.component';
+import { Comp2Component } from './comp2/comp2.component';
+import { Comp3Component } from './comp3/comp3.component';
+import { LocalstorageComponent } from './localstorage/localstorage.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +69,12 @@ import { PostsComponent } from './posts/posts.component';
     FormComponent,
     ReactiveformComponent,
     PasswordValidateDirective,
-    PostsComponent
+    PostsComponent,
+    SubjectComponent,
+    Comp1Component,
+    Comp2Component,
+    Comp3Component,
+    LocalstorageComponent
   ],
   imports: [
     BrowserModule,

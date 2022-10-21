@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DebugService } from '../debug.service';
+import { DesignUtilityService } from '../design-utility.service';
 
 @Component({
   selector: 'app-header',
@@ -70,11 +71,23 @@ export class HeaderComponent implements OnInit {
     {
       routeLink: '/posts',
       name: 'Posts-data'
+    },
+    {
+      routeLink: '/subject',
+      name: 'Subject'
+    },
+    {
+      routeLink: '/storage',
+      name: 'Store-Data'
     }
   ]
   selected: any;
-
-  constructor(private debugService: DebugService, private route: Router) { }
+  name: any
+  constructor(private debugService: DebugService, private route: Router, private designUtility: DesignUtilityService) {
+    this.designUtility.username.subscribe(res => {
+      this.name = res
+    })
+  }
 
   ngOnInit(): void {
     this.debugService.info("Header components initialized");

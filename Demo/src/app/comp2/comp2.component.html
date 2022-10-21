@@ -1,0 +1,16 @@
+<div class="card">
+    <div class="card-header bg-warning text-primary fw-bold">
+        Comp 2
+    </div>
+    <div class="card-body bg-light">
+        <h5 class="card-title pb-3">Username is : {{name}}</h5>
+        <div class="row">
+            <div class="col-6">
+                <input type="text" name="text" id="text" class="form-control" #temp>
+            </div>
+            <div class="col-6">
+                <button class="btn btn-success ms-2" (click)="designUtility.changeName(temp)">Change name</button>
+            </div>
+        </div>
+    </div>
+</div>

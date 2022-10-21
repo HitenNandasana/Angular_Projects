@@ -1,0 +1,67 @@
+<div class="p-4">
+    <h1>{{editMode === true ? 'Edit' : 'Add'}} User</h1>
+    <form class="row g-3 needs-validation" [formGroup]="addUserForm" (ngSubmit)="save()">
+        <div class="col-md-6"
+            [ngClass]="{'hasError': addUserForm.get('fname').invalid && (addUserForm.get('fname').touched || addUserForm.get('fname').dirty || temp) ,'hasSuccess': addUserForm.get('fname').valid && (addUserForm.get('fname').touched || addUserForm.get('fname').dirty) }">
+            <label for="fname" class="form-label required">First name</label>
+            <input type="text" class="form-control" minlength="3" formControlName="fname">
+            <!-- <ng-container *ngIf="addUserForm.invalid && addUserForm.submitted || addUserForm.invalid && fname.touched">
+                <small class="text-danger" *ngIf="fname.errors?.['required'] || fname.errors?.['pattern']">First name is
+                    Required. </small>
+                <small class="text-danger" *ngIf="fname.errors?.['minlength']">First name should be atleast 3
+                    charactors.</small>
+            </ng-container> -->
+            <ng-container *ngIf="addUserForm.invalid && (temp || addUserForm.get('fname').touched)">
+                <small class="text-danger" *ngIf="addUserForm.get('fname').invalid">First name is Required.</small>
+            </ng-container>
+        </div>
+
+        <div class="col-md-6"
+            [ngClass]="{'hasError': addUserForm.get('lname').invalid && (addUserForm.get('lname').touched || addUserForm.get('lname').dirty || temp) ,'hasSuccess': addUserForm.get('lname').valid && (addUserForm.get('lname').touched || addUserForm.get('lname').dirty) }">
+            <label for="lname" class="form-label required">Last name</label>
+            <input type="text" class="form-control" id="lname" formControlName="lname" minlength="3">
+            <ng-container *ngIf="addUserForm.invalid && (temp || addUserForm.get('lname').touched)">
+                <small class="text-danger" *ngIf="addUserForm.get('lname').invalid">Last name is Required.</small>
+            </ng-container>
+        </div>
+
+        <div class="col-md-6"
+            [ngClass]="{'hasError': addUserForm.get('uname').invalid && (addUserForm.get('uname').touched || addUserForm.get('uname').dirty || temp) ,'hasSuccess': addUserForm.get('uname').valid && (addUserForm.get('uname').touched || addUserForm.get('uname').dirty) }">
+            <label for="uname" class="form-label required">Username</label>
+            <input type="text" class="form-control" id="uname" formControlName="uname">
+            <ng-container *ngIf="addUserForm.invalid && (temp || addUserForm.get('uname').touched)">
+                <small class="text-danger" *ngIf="addUserForm.get('uname').invalid">Username is Required.</small>
+            </ng-container>
+        </div>
+
+        <div class="col-md-6"
+            [ngClass]="{'hasError': addUserForm.get('password').invalid && (addUserForm.get('password').touched || addUserForm.get('password').dirty || temp) ,'hasSuccess': addUserForm.get('password').valid && (addUserForm.get('password').touched || addUserForm.get('password').dirty) }">
+            <label for="password" class="form-label required">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password">
+            <!-- <ng-container
+                *ngIf="addUserForm.invalid && addUserForm.submitted || addUserForm.invalid && password.touched">
+                <small class="text-danger" *ngIf="password.errors?.['required']">Password is Required. </small>
+                <small class="text-danger"
+                    *ngIf="password.errors?.['passwordValidate'] && (password.touched || password.dirty || password.pristine)">Password
+                    must
+                    contain at least one Uppercase latter, one Lowercase letter, one Digit and one Special
+                    charactor.</small>
+            </ng-container> -->
+            <ng-container *ngIf="addUserForm.invalid && (temp || addUserForm.get('password').touched)">
+                <small class="text-danger" *ngIf="addUserForm.get('password').errors?.['required']">Password is
+                    Required. </small>
+                <small class="text-danger"
+                    *ngIf="addUserForm.get('password').dirty && addUserForm.get('password').errors?.['pattern']">Password
+                    must
+                    contain at least one Uppercase latter, one Lowercase letter, one Digit and one Special
+                    charactor.</small>
+            </ng-container>
+        </div>
+
+        <div class="col-12 d-flex align-items-center">
+            <button class="btn btn-primary" type="submit">Save</button>
+            <a [routerLink]="['/users']" routerLinkActive="router-link-active"
+                class="text-decoration-none ms-3">Cancel</a>
+        </div>
+    </form>
+</div>
