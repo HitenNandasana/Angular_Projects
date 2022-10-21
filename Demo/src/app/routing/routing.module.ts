@@ -5,7 +5,7 @@ import { EmpDetailsComponent } from './emp-details/emp-details.component';
 import { RoutingComponent } from './routing.component';
 
 const empRoute: Routes = [
-  { path: '', title: 'Details', component: RoutingComponent },
+  { path: '', title: 'Routing', component: RoutingComponent },
   { path: 'emp-detail', title: 'Details', component: EmpDetailsComponent }
 ]
 

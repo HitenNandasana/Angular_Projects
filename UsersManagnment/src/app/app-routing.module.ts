@@ -1,19 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdduserComponent } from './adduser/adduser.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { UsersComponent } from './users/users.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 const routes: Routes = [
   { path: 'login', title: 'Login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'home', title: 'Home', component: HomeComponent },
-  { path: 'users', title: 'Users', component: UsersComponent },
-  { path: 'users/add', title: 'Add User', component: AdduserComponent },
-  { path: 'users/edit/:id', title: 'Edit User', component: AdduserComponent },
-  // { path: 'logout', title: 'Login', component: LoginComponent },
+  { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule) },
   { path: 'register', title: 'Register', component: RegisterComponent },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
@@ -22,4 +17,8 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+  constructor() {
+    console.log('app loaded');
+  }
+}
