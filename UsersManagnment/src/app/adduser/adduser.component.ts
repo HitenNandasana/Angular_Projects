@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DesignUtilityService } from '../design-utility.service';
@@ -10,12 +10,16 @@ import { DesignUtilityService } from '../design-utility.service';
   styleUrls: ['./adduser.component.css']
 })
 export class AdduserComponent implements OnInit {
+
+  addUserForm: FormBuilder | any;
   editMode: any;
   id: any;
   userdata: any;
   loginUserObj: any;
+  temp = false;
 
-  constructor(private route: Router, private designUtility: DesignUtilityService, private toastr: ToastrService, private activateRoute: ActivatedRoute) {
+
+  constructor(private route: Router, private designUtility: DesignUtilityService, private toastr: ToastrService, private activateRoute: ActivatedRoute, private fb: FormBuilder, private activeRoute: ActivatedRoute) {
     this.designUtility.editMode.subscribe(res => {
       this.editMode = res;
     })
@@ -28,10 +32,30 @@ export class AdduserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (/edit/.test(window.location.href)) {
+      this.editMode = true;
+      this.activateRoute.paramMap.subscribe(param => {
+        let udata = this.designUtility.getSingleUserdata(this.loginUserObj.userList, param.get('id'));
+        if (udata === undefined) {
+          alert('User Not Found');
+          this.route.navigate(['/users']);
+        } else {
+          this.userdata = udata;
+        }
+      })
+    }
+    this.addUserForm = this.fb.group({
+      'fname': [this.editMode ? this.userdata.firstname : '', [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
+      'lname': [this.editMode ? this.userdata.lastname : '', Validators.required],
+      'uname': [this.editMode ? this.userdata.username : '', Validators.required],
+      'password': [this.editMode ? this.userdata.password : '', [Validators.required, Validators.pattern("^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,16}$")]]
+    })
+
   }
 
-  save(addUserForm: NgForm) {
-    if (addUserForm) {
+  save() {
+    this.temp = true;
+    if (this.addUserForm.valid) {
       let data = this.designUtility.getRegisterData();
       const userArr = this.loginUserObj.userList;
       if (!this.editMode) {
@@ -42,10 +66,10 @@ export class AdduserComponent implements OnInit {
         }
         let obj = {
           id: this.id,
-          firstname: addUserForm.value.fname.replace(/\s+/g, ' ').trim(),
-          lastname: addUserForm.value.lname.replace(/\s+/g, ' ').trim(),
-          username: addUserForm.value.uname.replace(/\s+/g, ' ').trim(),
-          password: addUserForm.value.password.replace(/\s+/g, ' ').trim()
+          firstname: this.addUserForm.value.fname.replace(/\s+/g, ' ').trim(),
+          lastname: this.addUserForm.value.lname.replace(/\s+/g, ' ').trim(),
+          username: this.addUserForm.value.uname.replace(/\s+/g, ' ').trim(),
+          password: this.addUserForm.value.password.replace(/\s+/g, ' ').trim()
         }
         userArr.push(obj);
         this.designUtility.user.next(this.loginUserObj);
@@ -62,14 +86,13 @@ export class AdduserComponent implements OnInit {
         this.toastr.success('User added Successfully!', 'Success!');
       } else {
 
-        console.log("else edit");
         const newArr = userArr.map((obj: any) => {
           if (obj.id === this.userdata.id) {
 
-            this.userdata.firstname = addUserForm.value.fname;
-            this.userdata.lastname = addUserForm.value.lname;
-            this.userdata.username = addUserForm.value.uname;
-            this.userdata.password = addUserForm.value.password;
+            this.userdata.firstname = this.addUserForm.value.fname;
+            this.userdata.lastname = this.addUserForm.value.lname;
+            this.userdata.username = this.addUserForm.value.uname;
+            this.userdata.password = this.addUserForm.value.password;
 
             return this.userdata;
           }
@@ -85,12 +108,8 @@ export class AdduserComponent implements OnInit {
         this.designUtility.setRegisterData(arr);
         this.designUtility.setLoginData(this.loginUserObj);
         this.toastr.success('User Updated Successfully!', 'Success!');
-
       }
-
-
       this.route.navigate(['/users']);
-
     }
   }
 

@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
         // data.push(this.loginUserObj);
         this.designUtility.setLoginData(this.loginUserObj);
 
-        this.toastr.success('Login Successfully!', 'Success!');
+        this.toastr.success('Login Successfully!');
         this.route.navigate(['/home']);
       } else {
         this.loginCheckMessage = true;

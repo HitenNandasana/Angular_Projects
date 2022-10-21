@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, single } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class DesignUtilityService {
   constructor() { }
 
   checkCredencial(form: any) {
-    let logindata = JSON.parse(localStorage.getItem('register') || '');
+    let logindata = this.getRegisterData();
     const userObj = logindata.find((obj: any) => obj.username === form.value.uname);
     if (userObj !== undefined) {
       if (userObj.password === form.value.password) {
@@ -28,6 +28,11 @@ export class DesignUtilityService {
     } else {
       return false;
     }
+  }
+
+  getSingleUserdata(userlist: any, userid: any) {
+    const singleuser = userlist.find((obj: any) => obj.id === Number(userid));
+    return singleuser;
   }
 
   getRegisterData() {

@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
   register() {
     this.temp = true;
     if (this.registerForm.valid === true) {
-      let data = JSON.parse(localStorage.getItem('register') || '');
+      let data = this.designUtility.getRegisterData();
 
       if (Object.keys(data).length === 0) {
         this.id = 1;
