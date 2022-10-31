@@ -9,7 +9,7 @@ export class DesignUtilityService {
   editMode = new BehaviorSubject<boolean>(false);
   user = new BehaviorSubject<any>('');
   loginUser = new BehaviorSubject<any>('');
-  loggedIn = new BehaviorSubject<any>('');
+  loggedIn = new BehaviorSubject<any>('Login');
 
 
   constructor() { }
