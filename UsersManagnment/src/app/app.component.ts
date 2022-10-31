@@ -20,10 +20,6 @@ export class AppComponent implements OnInit {
       routeLink: '/users',
       name: 'Users'
     }
-    // {
-    //   routeLink: '/logout',
-    //   name: 'Logout'
-    // }
   ]
   selected: any;
   loginName: string = '';
@@ -38,6 +34,9 @@ export class AppComponent implements OnInit {
 
     if (this.loginName === 'Login' && !(/login/.test(window.location.href))) {
       this.route.navigate(['/login']);
+    }
+    if (this.loginName === 'Logout' && (/login/.test(window.location.href))) {
+      this.route.navigate(['/home']);
     }
 
   }
