@@ -18,7 +18,7 @@
         </ng-container>
     </div>
     <div class="d-flex align-items-center">
-        <button type="submit" class="btn btn-primary">Add</button>
-        <a [routerLink]="['/todos']" routerLinkActive="router-link-active" class="text-decoration-none ms-2">Cancel</a>
+        <button type="submit" class="btn btn-primary">{{this.editMode ? 'Update' : 'Add'}}</button>
+        <a [routerLink]="['/todo/list']" routerLinkActive="router-link-active" class="text-decoration-none ms-2">Cancel</a>
     </div>
 </form>

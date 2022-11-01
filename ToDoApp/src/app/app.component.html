@@ -10,13 +10,13 @@
           <a class="nav-link" [routerLink]="['/home']" routerLinkActive="router-link-active">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/todos']" routerLinkActive="router-link-active">To-Do</a>
+          <a class="nav-link" [routerLink]="['todo/list']" routerLinkActive="router-link-active">To-Do</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/activeTodos']" routerLinkActive="router-link-active">Active</a>
+          <a class="nav-link" [routerLink]="['todo/active']" routerLinkActive="router-link-active">Active</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/completedTodos']" routerLinkActive="router-link-active">Completed</a>
+          <a class="nav-link" [routerLink]="['todo/completed']" routerLinkActive="router-link-active">Completed</a>
         </li>
       </ul>
     </div>

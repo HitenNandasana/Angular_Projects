@@ -8,11 +8,23 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 const route: Routes = [
   {
-    path: '',
+    path: 'list',
+    component: TodosComponent
+  },
+  {
+    path: 'active',
+    component: TodosComponent
+  },
+  {
+    path: 'completed',
     component: TodosComponent
   },
   {
     path: 'add',
+    component: AddUpdateTodoComponent
+  },
+  {
+    path: 'edit/:id',
     component: AddUpdateTodoComponent
   }
 ]
@@ -28,4 +40,6 @@ const route: Routes = [
     RouterModule.forChild(route)
   ]
 })
-export class TodosModule { }
+export class TodosModule {
+
+}

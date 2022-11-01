@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ActivetodosComponent } from './activetodos/activetodos.component';
-import { CompletedtodosComponent } from './completedtodos/completedtodos.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
@@ -16,19 +14,9 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'todos',
+    path: 'todo',
     title: 'To-Do',
     loadChildren: () => import('./todos/todos.module').then(m => m.TodosModule)
-  },
-  {
-    path: 'activeTodos',
-    title: 'Active To-Do',
-    component: ActivetodosComponent
-  },
-  {
-    path: 'completedTodos',
-    title: 'Completed To-Do',
-    component: CompletedtodosComponent
   }
 ];
 

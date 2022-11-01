@@ -10,15 +10,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { ActivetodosComponent } from './activetodos/activetodos.component';
-import { CompletedtodosComponent } from './completedtodos/completedtodos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    ActivetodosComponent,
-    CompletedtodosComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
