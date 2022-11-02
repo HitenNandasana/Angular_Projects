@@ -8,6 +8,7 @@ export class TodosService {
 
   editMode = new BehaviorSubject(false);
   todoObj = new BehaviorSubject('');
+  key = new BehaviorSubject('');
 
   constructor() { }
 

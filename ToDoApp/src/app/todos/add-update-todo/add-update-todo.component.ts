@@ -16,19 +16,17 @@ export class AddUpdateTodoComponent implements OnInit {
   submit = false;
   editMode: any;
   todoObj: any;
+  key: any;
 
   constructor(private fb: FormBuilder, private todoservice: TodosService, private route: Router, private toastr: ToastrService) {
-    if (localStorage.getItem('todos') === null || localStorage.getItem('todos') == undefined) {
-      let todosList: any = [];
-
-      this.todoservice.setTodos(todosList);
-      return;
-    }
     this.todoservice.editMode.subscribe(res => {
       this.editMode = res;
     })
     this.todoservice.todoObj.subscribe(res => {
       this.todoObj = res;
+    })
+    this.todoservice.key.subscribe(res => {
+      this.key = res;
     })
   }
 
@@ -71,7 +69,11 @@ export class AddUpdateTodoComponent implements OnInit {
         this.todoservice.editTodo(obj, data);
         this.toastr.success('To-Do Updated successfully!');
       }
-      this.route.navigate(['/todo/list']);
+      this.route.navigate([`/todo/${this.key}`]);
     }
+  }
+
+  cancel() {
+    this.route.navigate([`/todo/${this.key}`]);
   }
 }

@@ -11,6 +11,12 @@ export class AppComponent {
   title = 'ToDoApp';
 
   constructor(private route: Router, private todoservice: TodosService) {
+    if (localStorage.getItem('todos') === null || localStorage.getItem('todos') == undefined) {
+      let todosList: any = [];
+
+      this.todoservice.setTodos(todosList);
+      return;
+    }
   }
 
   addToDo() {

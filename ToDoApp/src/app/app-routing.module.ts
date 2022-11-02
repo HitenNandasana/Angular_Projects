@@ -5,11 +5,11 @@ import { HomeComponent } from './home/home.component';
 const routes: Routes = [
   {
     path: '',
-    title: 'Home',
-    component: HomeComponent
+    redirectTo: 'todo/home',
+    pathMatch: 'full'
   },
   {
-    path: 'home',
+    path: 'todo/home',
     title: 'Home',
     component: HomeComponent
   },
@@ -17,6 +17,10 @@ const routes: Routes = [
     path: 'todo',
     title: 'To-Do',
     loadChildren: () => import('./todos/todos.module').then(m => m.TodosModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'todo/home',
   }
 ];
 

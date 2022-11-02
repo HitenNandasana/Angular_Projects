@@ -17,7 +17,8 @@ export class TodosComponent implements OnInit {
   completedCount = 0;
 
   constructor(private route: Router, private todoservice: TodosService, private toastr: ToastrService) {
-    this.temp = /list/.test(window.location.href) ? 'todo' : (/active/.test(window.location.href) ? 'active' : 'completed');
+    this.temp = /list/.test(window.location.href) ? 'list' : (/active/.test(window.location.href) ? 'active' : 'completed');
+    this.todoservice.key.next(this.temp);
 
     this.todoservice.editMode.subscribe(res => {
       this.editMode = res;
@@ -57,6 +58,8 @@ export class TodosComponent implements OnInit {
     this.todoList = this.todoservice.getTodos();
     if (!status) {
       this.toastr.success('To-Do Completed!');
+    } else {
+      this.toastr.success('To-Do Active!');
     }
   }
 

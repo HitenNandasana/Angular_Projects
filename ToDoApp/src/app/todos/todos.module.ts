@@ -13,18 +13,22 @@ const route: Routes = [
   },
   {
     path: 'active',
+    title: 'Active To-Do',
     component: TodosComponent
   },
   {
     path: 'completed',
+    title: 'Complted To-Do',
     component: TodosComponent
   },
   {
     path: 'add',
+    title: 'Add To-Do',
     component: AddUpdateTodoComponent
   },
   {
     path: 'edit/:id',
+    title: 'Edit To-Do',
     component: AddUpdateTodoComponent
   }
 ]
