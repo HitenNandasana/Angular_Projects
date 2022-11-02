@@ -19,8 +19,4 @@ export class AppComponent {
     }
   }
 
-  addToDo() {
-    this.todoservice.editMode.next(false)
-    this.route.navigate(['todo/add']);
-  }
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TodosService } from '../todos/todos.service';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +7,7 @@ import { TodosService } from '../todos/todos.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private todoservice: TodosService) {
-    this.todoservice.key.next('home');
+  constructor() {
   }
 
   ngOnInit(): void {
