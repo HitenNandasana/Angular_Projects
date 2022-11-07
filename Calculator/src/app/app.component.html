@@ -5,23 +5,23 @@
   <label for="label" class="digit">{{input}}</label>
   <div class="grid-container">
     <button type="button" (click)="clear()" class="btn grid-item acbtn">AC</button>
-    <button type="button" (click)="negative()" class="btn grid-item">+/-</button>
-    <button type="button" (click)="operatorFun('%')" class="btn grid-item">%</button>
-    <button type="button" (click)="operatorFun('/')" class="btn grid-item">&#xF7;</button>
+    <button type="button" (click)="negative()" class="btn grid-item" [disabled]="infinity">+/-</button>
+    <button type="button" (click)="modulo()" class="btn grid-item" [disabled]="infinity">%</button>
+    <button type="button" (click)="operatorFun('/')" class="btn grid-item" [disabled]="infinity">&#xF7;</button>
     <button type="button" (click)="fun('7')" class="btn grid-item">7</button>
     <button type="button" (click)="fun('8')" class="btn grid-item">8</button>
     <button type="button" (click)="fun('9')" class="btn grid-item">9</button>
-    <button type="button" (click)="operatorFun('*')" class="btn grid-item">&times;</button>
+    <button type="button" (click)="operatorFun('*')" class="btn grid-item" [disabled]="infinity">&times;</button>
     <button type="button" (click)="fun('4')" class="btn grid-item">4</button>
     <button type="button" (click)="fun('5')" class="btn grid-item">5</button>
     <button type="button" (click)="fun('6')" class="btn grid-item">6</button>
-    <button type="button" (click)="operatorFun('-')" class="btn grid-item">-</button>
+    <button type="button" (click)="operatorFun('-')" class="btn grid-item" [disabled]="infinity">-</button>
     <button type="button" (click)="fun('1')" class="btn grid-item">1</button>
     <button type="button" (click)="fun('2')" class="btn grid-item">2</button>
     <button type="button" (click)="fun('3')" class="btn grid-item">3</button>
-    <button type="button" (click)="operatorFun('+')" class="btn grid-item">+</button>
+    <button type="button" (click)="operatorFun('+')" class="btn grid-item" [disabled]="infinity">+</button>
     <button type="button" (click)="fun('0')" class="btn grid-item item1">0</button>
-    <button type="button" (click)="fun('.')" class="btn grid-item">.</button>
+    <button type="button" (click)="dot('.')" class="btn grid-item" [disabled]="infinity">.</button>
     <button type="button" (click)="equal()" class="btn grid-item bg-dark text-white">=</button>
   </div>
 </div>

@@ -9,22 +9,28 @@ export class AppComponent {
   title = 'Calculator';
   input = '';
   answer = false;
+  infinity = false;
 
   fun(number: any) {
-    if (this.input.length < 15) {
-      if (this.answer) {
+    let pos = this.getLastOperandPosition();
+    let str = this.input.substring(pos)
+    if (str.length < 15) {
+      if (this.answer && this.infinity) {
         if (this.input !== '') {
           this.input = '';
+          this.infinity = false;
           this.answer = false;
         }
       }
       let lastChar = this.input.charAt(this.input.length - 1);
-      let pos = this.getLastOperandPosition();
       if (number === '0') {
         if (lastChar === '+' || lastChar === '-' || lastChar === '*' || lastChar === '/' || lastChar === '%') {
           this.input += number;
         }
         else if (this.input.charAt(pos + 1) !== '0') {
+          this.input += number;
+        }
+        else if (this.input.charAt(pos + 2) === '.') {
           this.input += number;
         }
         if (this.input === '') {
@@ -35,8 +41,42 @@ export class AppComponent {
           this.input += number;
         }
         else {
-          this.input = this.input.replace(/.$/, number);
+          if (this.input.charAt(pos + 2) === '.') {
+            this.input += number;
+          } else {
+            this.input = this.input.replace(/.$/, number);
+          }
         }
+      }
+    }
+  }
+
+  dot(number: any) {
+    let pos = this.getLastOperandPosition();
+    let string = this.input.substring(pos);
+    if (this.input.length - pos === 1) {
+      this.input = this.input + '0' + number;
+    } else {
+      if (string.includes(number)) {
+        return;
+      } else {
+        this.input += number;
+      }
+    }
+  }
+
+  modulo() {
+    if (this.input === '') {
+      return;
+    } else {
+
+      let lastChar = this.input.charAt(this.input.length - 1);
+      if (['+', '-', '*', '/'].includes(lastChar)) {
+        return;
+      } else {
+        this.input = eval(this.input).toString();
+        this.input = this.input + '/100';
+        this.input = eval(this.input).toString();
       }
     }
   }
@@ -44,15 +84,23 @@ export class AppComponent {
   clear() {
     this.input = '';
     this.answer = false;
+    this.infinity = false;
   }
-  negative() {
-    let lastChar = this.input.charAt(this.input.length - 1);
-    let pos = this.getLastOperandPosition();
-    console.log(pos);
-    if (this.input !== '') {
-      let i = this.input.charAt(pos + 1);
-    } else {
 
+  negative() {
+    let pos = this.getLastOperandPosition();
+    if (this.input !== '') {
+      if (this.input.length - pos === 1) {
+        return;
+      } else {
+        let i = this.input.charAt(pos);
+        let symbol = i === '+' ? '-' : '+';
+        if (i === '+' || i === '-') {
+          this.input = this.input.substring(0, pos) + symbol + this.input.substring(pos + 1);
+        } else {
+          this.input = this.input.substring(0, pos) + i + '(' + symbol + this.input.substring(pos + 1) + ')';
+        }
+      }
     }
   }
 
@@ -71,6 +119,10 @@ export class AppComponent {
   }
 
   equal() {
+    if (this.infinity) {
+      this.input = '';
+    }
+    this.infinity = false;
     if (this.answer) {
       return;
     } else {
@@ -79,6 +131,13 @@ export class AppComponent {
         this.input = this.input.replace(/.$/, '');
       }
       this.input = eval(this.input).toString();
+      this.input = this.input === 'Infinity' || this.input === '-Infinity' ? 'Cannot divide by zero' : this.input;
+      this.input = this.input === 'NaN' ? 'Result is undefined' : this.input;
+      if (this.input === 'Cannot divide by zero' || this.input === 'Result is undefined') {
+        this.infinity = true;
+      } else {
+        this.infinity = false;
+      }
       this.answer = true;
     }
   }
