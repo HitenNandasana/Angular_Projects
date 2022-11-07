@@ -3,13 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { AuthGuard } from './auth/auth.guard';
+import { LoginauthGuard } from './auth/loginauth.guard';
 
 const routes: Routes = [
-  { path: 'login', title: 'Login', component: LoginComponent },
+  { path: 'login', canActivate: [LoginauthGuard], title: 'Login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'home', title: 'Home', component: HomeComponent },
-  { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule) },
-  { path: 'register', title: 'Register', component: RegisterComponent },
+  { path: 'home', canActivate: [AuthGuard], title: 'Home', component: HomeComponent },
+  { path: 'users', canActivate: [AuthGuard], loadChildren: () => import('./users/users.module').then(m => m.UsersModule) },
+  { path: 'register', canActivate: [LoginauthGuard], title: 'Register', component: RegisterComponent },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
