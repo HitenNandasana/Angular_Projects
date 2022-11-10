@@ -6,41 +6,46 @@
 <table class="table table-striped table-hover border">
     <thead>
         <tr class="bg-dark text-white">
-            <th scope="col">Sr No.</th>
+            <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Price</th>
             <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>TV</td>
-            <td>&#8377;20,000</td>
+        <tr *ngFor="let item of productList; let i=index">
+            <th scope="row">{{item.id}}</th>
+            <td>{{item.name}}</td>
+            <td>&#8377;{{item.price}}</td>
             <td>
                 <i class="fa-solid fa-eye text-success" mat-raised-button matTooltip="View" matTooltipClass="tooltip"
-                    type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                    type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="view(item)"></i>
                 <i class="fa-solid fa-pen-to-square ms-3 text-primary" mat-raised-button matTooltip="Edit"
                     matTooltipClass="tooltip" type="button"></i>
                 <i class="fa-solid fa-trash ms-3 text-danger" mat-raised-button matTooltip="Delete"
-                    matTooltipClass="tooltip" type="button"></i>
+                    matTooltipClass="tooltip" type="button" (click)="deleteProduct(i,item)"></i>
             </td>
         </tr>
     </tbody>
 </table>
-
-
-
-<!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">{{productObj.name}}</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ...
+                <div class="d-flex flex-row">
+                    <div style="width: 50%;height: 50%;">
+                        <img class="img-thumbnail" src="{{productObj.image}}">
+                    </div>
+                    <div class="ps-2">
+                        <b>Slogen:- </b>{{productObj.slug}}<br>
+                        <b>Description:- </b>{{productObj.description}}<br>
+                        <b>Price:- </b>&#8377;{{productObj.price}}
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

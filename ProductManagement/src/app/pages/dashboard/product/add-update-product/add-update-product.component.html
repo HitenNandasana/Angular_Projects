@@ -36,7 +36,7 @@
             <div class="mb-3 form-group"
                 [ngClass]="{'hasError': addProductForm.get('price').invalid && (addProductForm.get('price').touched || addProductForm.get('price').dirty || submit) ,'hasSuccess': addProductForm.get('price').valid && (addProductForm.get('price').touched || addProductForm.get('price').dirty) }">
                 <label for="price" class="form-label required">Price</label>
-                <input type="tel" class="form-control" name="price" id="price" formControlName="price"
+                <input type="tel" class="form-control" name="price" id="price" maxlength="3" formControlName="price"
                     (keypress)="isNumber($event)">
                 <ng-container *ngIf="addProductForm.invalid && (submit || addProductForm.get('price').touched)">
                     <small class="text-danger" *ngIf="addProductForm.get('price').invalid">Price is Required.</small>
@@ -44,12 +44,17 @@
             </div>
 
             <div class="mb-3 form-group"
-                [ngClass]="{'hasError': addProductForm.get('image').invalid && (addProductForm.get('image').dirty || submit) ,'hasSuccess': addProductForm.get('image').valid && (addProductForm.get('image').dirty) }">
+                [ngClass]="{'hasError': fileHolder === undefined && submit ,'hasSuccess': fileHolder !== undefined }">
                 <label for="image" class="form-label required">Image</label>
-                <input type="file" class="form-control" name="image" id="image" (change)="onFileSelect($event)"
-                    accept="image/*" formControlName="image">
-                <ng-container *ngIf="addProductForm.invalid && (submit)">
-                    <small class="text-danger" *ngIf="addProductForm.get('image').invalid">Image is
+                <input type="file" hidden name="image" id="image" (change)="onFileSelect($event)" accept="image/*"
+                    formControlName="image" #image>
+                <div>
+                    <button type="button" class="btn btn-warning btn-sm rounded" (click)="image.click()"><i
+                            class="fa-solid fa-paperclip text-dark"></i></button>
+                    <span for="image" class="text-dark p-2"> {{fileHolder?.name}}</span>
+                </div>
+                <ng-container *ngIf="submit">
+                    <small class="text-danger" *ngIf="fileHolder === undefined">Image is
                         Required.</small>
                 </ng-container>
             </div>

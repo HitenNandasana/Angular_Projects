@@ -1,21 +1,48 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor(private http: HttpClient) { }
+  productList = new BehaviorSubject<any>('');
+
+  constructor(private http: HttpClient,
+    private route: Router,
+    private toastr: ToastrService) { }
+
+  setProductData(data: any) {
+    localStorage.setItem('Product', JSON.stringify(data));
+  }
+
+  getProductData() {
+    return JSON.parse(localStorage.getItem('Product') || '');
+  }
 
   add(data: FormData) {
-    // let token = localStorage.getItem('Token');
-    // let header = new HttpHeaders().set(
-    //   "Authorization", 'Bearer' + token
-    // )
-    //   .set('Content-Type', 'application/json');
-    // let headers = { headers: header };
-    // console.log(header);
-    return this.http.post<any>(environment.baseApi + 'products', data);
+    this.http.post<any>(environment.baseApi + 'products', data).subscribe(res => {
+      console.log(res);
+      let dataList = this.getProductData();
+      dataList.push(res.data);
+      this.setProductData(dataList);
+    });
+    setTimeout(() => {
+      this.route.navigate(['dashboard/product']);
+      this.toastr.success('Product added successfully');
+
+    }, 500);
+  }
+
+  delete(i: any, obj: any) {
+    this.http.post<any>(environment.baseApi + 'products/delete', obj).subscribe(res => {
+      console.log(res);
+    })
+    let data = this.getProductData();
+    data.splice(i, 1);
+    this.setProductData(data);
   }
 }

@@ -27,7 +27,7 @@ export class AddUpdateProductComponent implements OnInit {
       'slug': ['', [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
       'description': ['', [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
       'price': ['', [Validators.required]],
-      'image': ['', [Validators.required]]
+      'image': ['']
     })
   }
 
@@ -56,10 +56,7 @@ export class AddUpdateProductComponent implements OnInit {
       formData.append('price', this.addProductForm.value.price);
       formData.append('image', this.fileHolder, this.fileHolder.name);
 
-      this.productservice.add(formData).subscribe(res => {
-        console.log(res);
-      })
-      this.route.navigate(['dashboard/product']);
+      this.productservice.add(formData);
       this.submit = false;
     }
   }
