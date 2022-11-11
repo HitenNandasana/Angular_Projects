@@ -18,9 +18,7 @@ export class ProductComponent implements OnInit {
     private toastr: ToastrService) {
 
     if (localStorage.getItem('Product') === null || localStorage.getItem('Product') == undefined) {
-      let productList: any = [];
-
-      this.productService.setProductData(productList);
+      this.productService.setProductData([]);
       return;
     }
     this.productList = this.productService.getProductData();
@@ -29,12 +27,17 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  view(obj: any) {
+  viewProduct(obj: any) {
     this.productObj = obj;
   }
 
   addProduct() {
     this.route.navigate(['dashboard/product/add']);
+  }
+
+  editProduct(item: any) {
+    this.productService.ediProductObj.next(item);
+    this.route.navigate(['dashboard/product/update', item.id]);
   }
 
   deleteProduct(index: any, data: any) {

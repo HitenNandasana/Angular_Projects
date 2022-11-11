@@ -1,6 +1,6 @@
 <div class="layout">
     <div class="p-4 box">
-        <h1 class="text-center text-secondary">Add Product</h1>
+        <h1 class="text-center text-secondary">{{productId ? 'Edit' : 'Add'}} Product</h1>
         <hr>
         <form class="mt-3" [formGroup]="addProductForm" (ngSubmit)="add()">
             <div class="mb-3 form-group"
@@ -39,7 +39,12 @@
                 <input type="tel" class="form-control" name="price" id="price" maxlength="3" formControlName="price"
                     (keypress)="isNumber($event)">
                 <ng-container *ngIf="addProductForm.invalid && (submit || addProductForm.get('price').touched)">
-                    <small class="text-danger" *ngIf="addProductForm.get('price').invalid">Price is Required.</small>
+                    <small class="text-danger" *ngIf="addProductForm.get('price').errors?.['required']">Price is
+                        Required.</small>
+                    <small class="text-danger"
+                        *ngIf="addProductForm.get('price').dirty && addProductForm.get('price').errors?.['pattern']">Price
+                        must be an
+                        integer.</small>
                 </ng-container>
             </div>
 
@@ -51,7 +56,8 @@
                 <div>
                     <button type="button" class="btn btn-warning btn-sm rounded" (click)="image.click()"><i
                             class="fa-solid fa-paperclip text-dark"></i></button>
-                    <span for="image" class="text-dark p-2"> {{fileHolder?.name}}</span>
+                    <span for="image" class="text-dark p-2"> {{imgNm ? imgNm :
+                        fileHolder?.name}}</span>
                 </div>
                 <ng-container *ngIf="submit">
                     <small class="text-danger" *ngIf="fileHolder === undefined">Image is
@@ -60,7 +66,7 @@
             </div>
 
             <div class="col-12 d-flex align-items-center">
-                <button type="submit" class="btn btn-primary">Add</button>
+                <button type="submit" class="btn btn-primary">{{productId ? 'Update' : 'Add'}}</button>
                 <a class="text-decoration-none ms-3" (click)="location.back()">Cancel</a>
             </div>
         </form>

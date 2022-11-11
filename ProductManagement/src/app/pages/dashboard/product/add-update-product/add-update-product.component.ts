@@ -1,7 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'src/app/appServices/product/product.service';
 
 @Component({
@@ -14,20 +15,33 @@ export class AddUpdateProductComponent implements OnInit {
   addProductForm: FormBuilder | any;
   submit = false;
   fileHolder: File | undefined;
+  ediProductObj: any
+  productId: any;
+  imgNm: any
 
 
   constructor(private fb: FormBuilder,
     public location: Location,
     private productservice: ProductService,
-    private route: Router) { }
+    private toastr: ToastrService,
+    private avticeroute: ActivatedRoute) {
+
+    this.productservice.ediProductObj.subscribe(res => {
+      this.ediProductObj = res;
+      this.imgNm = this.ediProductObj.imgName;
+    });
+    this.avticeroute.paramMap.subscribe(param => {
+      this.productId = param.get('id');
+    })
+  }
 
   ngOnInit(): void {
     this.addProductForm = this.fb.group({
-      'name': ['', [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
-      'slug': ['', [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
-      'description': ['', [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
-      'price': ['', [Validators.required]],
-      'image': ['']
+      'name': [this.productId ? this.ediProductObj.name : '', [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
+      'slug': [{ value: this.productId ? this.ediProductObj.slug : '', disabled: this.productId ? true : false }, [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
+      'description': [{ value: this.productId ? this.ediProductObj.description : '', disabled: this.productId ? true : false }, [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
+      'price': [{ value: this.productId ? Number(this.ediProductObj.price) : '', disabled: this.productId ? true : false }, [Validators.required, Validators.pattern("[1-9].*")]],
+      'image': [{ value: '', disabled: this.productId ? true : false }, Validators.required]
     })
   }
 
@@ -45,18 +59,29 @@ export class AddUpdateProductComponent implements OnInit {
     }
     return true;
   }
+
   add() {
     this.submit = true;
-    if (this.addProductForm.valid && this.fileHolder && this.fileHolder.name) {
-      const formData = new FormData();
+    if (this.addProductForm.valid) {
+      if (!this.productId && this.fileHolder && this.fileHolder.name) {
+        const formData = new FormData();
 
-      formData.append('name', this.addProductForm.value.name);
-      formData.append('slug', this.addProductForm.value.slug);
-      formData.append('description', this.addProductForm.value.description);
-      formData.append('price', this.addProductForm.value.price);
-      formData.append('image', this.fileHolder, this.fileHolder.name);
+        formData.append('name', this.addProductForm.value.name);
+        formData.append('slug', this.addProductForm.value.slug);
+        formData.append('description', this.addProductForm.value.description);
+        formData.append('price', this.addProductForm.value.price);
+        formData.append('image', this.fileHolder, this.fileHolder.name);
 
-      this.productservice.add(formData);
+
+        this.productservice.add(formData, this.fileHolder.name);
+      } else if (this.productId) {
+        const formData = new FormData();
+
+        formData.append('id', this.ediProductObj.id);
+        formData.append('name', this.addProductForm.value.name);
+
+        this.productservice.update(formData);
+      }
       this.submit = false;
     }
   }
