@@ -46,8 +46,8 @@ export class AdduserComponent implements OnInit {
     }
     this.addUserForm = this.fb.group({
       'fname': [this.editMode ? this.userdata.firstname : '', [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
-      'lname': [this.editMode ? this.userdata.lastname : '', Validators.required],
-      'uname': [this.editMode ? this.userdata.username : '', Validators.required],
+      'lname': [this.editMode ? this.userdata.lastname : '', [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
+      'uname': [this.editMode ? this.userdata.username : '', [Validators.required, Validators.pattern("^[a-zA-Z0-9].*")]],
       'password': [this.editMode ? this.userdata.password : '', [Validators.required, Validators.pattern("^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,16}$")]]
     })
 

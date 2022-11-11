@@ -32,12 +32,12 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.designUtility.autoLogin();
 
-    if (this.loginName === 'Login' && !(/login/.test(window.location.href))) {
-      this.route.navigate(['/login']);
-    }
-    if (this.loginName === 'Logout' && (/login/.test(window.location.href))) {
-      this.route.navigate(['/home']);
-    }
+    // if (this.loginName === 'Login' && !(/login/.test(window.location.href))) {
+    //   this.route.navigate(['/login']);
+    // }
+    // if (this.loginName === 'Logout' && (/login/.test(window.location.href))) {
+    //   this.route.navigate(['/home']);
+    // }
 
   }
   logInOut() {

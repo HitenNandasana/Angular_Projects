@@ -1,0 +1,6 @@
+::ng-deep .tooltip {
+    font-size: small;
+    padding: 2px;
+    margin: 4px !important;
+    
+}

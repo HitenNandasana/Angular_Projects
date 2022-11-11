@@ -1,0 +1,27 @@
+<h3 class="text-white bg-primary ps-3 d-flex align-items-center w-auto" style="height: 60px;font-family: math;">
+  <i class="fa-solid fa-calculator text-white me-3 bg-dark"></i>Calculator
+</h3>
+<div class="mt-5 p-3 box">
+  <label for="label" class="digit">{{input}}</label>
+  <div class="grid-container">
+    <button type="button" (click)="clear()" class="btn grid-item acbtn">AC</button>
+    <button type="button" (click)="negative()" class="btn grid-item" [disabled]="infinity">+/-</button>
+    <button type="button" (click)="modulo()" class="btn grid-item" [disabled]="infinity">%</button>
+    <button type="button" (click)="operatorFun('/')" class="btn grid-item" [disabled]="infinity">&#xF7;</button>
+    <button type="button" (click)="fun('7')" class="btn grid-item">7</button>
+    <button type="button" (click)="fun('8')" class="btn grid-item">8</button>
+    <button type="button" (click)="fun('9')" class="btn grid-item">9</button>
+    <button type="button" (click)="operatorFun('*')" class="btn grid-item" [disabled]="infinity">&times;</button>
+    <button type="button" (click)="fun('4')" class="btn grid-item">4</button>
+    <button type="button" (click)="fun('5')" class="btn grid-item">5</button>
+    <button type="button" (click)="fun('6')" class="btn grid-item">6</button>
+    <button type="button" (click)="operatorFun('-')" class="btn grid-item" [disabled]="infinity">-</button>
+    <button type="button" (click)="fun('1')" class="btn grid-item">1</button>
+    <button type="button" (click)="fun('2')" class="btn grid-item">2</button>
+    <button type="button" (click)="fun('3')" class="btn grid-item">3</button>
+    <button type="button" (click)="operatorFun('+')" class="btn grid-item" [disabled]="infinity">+</button>
+    <button type="button" (click)="fun('0')" class="btn grid-item item1">0</button>
+    <button type="button" (click)="dot('.')" class="btn grid-item" [disabled]="infinity">.</button>
+    <button type="button" (click)="equal()" class="btn grid-item bg-dark text-white">=</button>
+  </div>
+</div>

@@ -12,7 +12,7 @@ import { DesignUtilityService } from '../../design-utility.service';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormBuilder | any;
-  temp = false;
+  submit = false;
   id: any;
   arr: any = [];
 
@@ -27,15 +27,15 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      'fname': ['', Validators.required],
-      'lname': ['', Validators.required],
-      'uname': ['', Validators.required],
+      'fname': ['', [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
+      'lname': ['', [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
+      'uname': ['', [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
       'password': ['', [Validators.required, Validators.pattern("^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,16}$")]]
     })
   }
 
   register() {
-    this.temp = true;
+    this.submit = true;
     if (this.registerForm.valid === true) {
       let data = this.designUtility.getRegisterData();
 
@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit {
         userList: this.arr
       }
       data.push(obj);
-      localStorage.setItem('register', JSON.stringify(data));
+      this.designUtility.setRegisterData(data);
       this.toastr.success('Register Successfully!');
 
       this.route.navigate(['/login']);
