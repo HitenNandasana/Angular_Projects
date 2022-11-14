@@ -39,9 +39,9 @@ export class AddUpdateProductComponent implements OnInit {
     this.addProductForm = this.fb.group({
       'name': [this.productId ? this.ediProductObj.name : '', [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
       'slug': [{ value: this.productId ? this.ediProductObj.slug : '', disabled: this.productId ? true : false }, [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
-      'description': [{ value: this.productId ? this.ediProductObj.description : '', disabled: this.productId ? true : false }, [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
+      'description': [{ value: this.productId ? this.ediProductObj.description : '', disabled: this.productId ? true : false }, [Validators.required, Validators.pattern("^[a-zA-Z0-9].*")]],
       'price': [{ value: this.productId ? Number(this.ediProductObj.price) : '', disabled: this.productId ? true : false }, [Validators.required, Validators.pattern("[1-9].*")]],
-      'image': [{ value: '', disabled: this.productId ? true : false }, Validators.required]
+      'image': [{ value: '', disabled: this.productId ? true : false }]
     })
   }
 

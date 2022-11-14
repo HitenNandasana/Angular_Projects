@@ -6,7 +6,7 @@
             <div class="mb-3 form-group"
                 [ngClass]="{'hasError': signInForm.get('email').invalid && (signInForm.get('email').touched || signInForm.get('email').dirty || submit) ,'hasSuccess': signInForm.get('email').valid && (signInForm.get('email').touched || signInForm.get('email').dirty) }">
                 <label for="email" class="form-label required">Email</label>
-                <input type="text" class="form-control" name="email" id="email" formControlName="email"
+                <input type="email" class="form-control" name="email" id="email" formControlName="email"
                     (keydown)="onkeydown()">
                 <ng-container
                     *ngIf="signInForm.invalid && submit || signInForm.invalid && signInForm.get('email').touched">

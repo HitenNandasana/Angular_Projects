@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrConfig, ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/appServices/auth/auth.service';
 
 @Component({
@@ -13,20 +14,22 @@ export class SignUpComponent implements OnInit {
   signUpForm: FormBuilder | any;
   submit = false;
   fileHolder: File | undefined;
+  emailCheckMessage: boolean = false;
 
   constructor(private fb: FormBuilder,
     private authservice: AuthService,
-    private route: Router) { }
+    private route: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.signUpForm = this.fb.group({
       'name': ['', [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
       'first_name': ['', [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
       'last_name': ['', [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
-      'user_name': ['', [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
-      'email': ['', [Validators.required]],
-      'password': ['', [Validators.required]],
-      'profile_image': ['', [Validators.required]]
+      'user_name': ['', [Validators.required, Validators.pattern("^[a-zA-Z-0-9].*")]],
+      'email': ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      'password': ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9].*")]],
+      'profile_image': ['']
     })
   }
 
@@ -34,6 +37,9 @@ export class SignUpComponent implements OnInit {
     if (event.target.files && event.target.files.length) {
       this.fileHolder = event.target.files[0];
     }
+  }
+  onkeydown() {
+    this.emailCheckMessage = false;
   }
 
   signUp() {
@@ -51,8 +57,12 @@ export class SignUpComponent implements OnInit {
 
       this.authservice.signUp(formData).subscribe(res => {
         console.log(res);
-      });
-      this.route.navigate(['signin']);
+        this.route.navigate(['signin']);
+        this.toastr.success(res.msg);
+      },
+        error => {
+          this.emailCheckMessage = true;
+        });
       this.submit = false;
     }
   }

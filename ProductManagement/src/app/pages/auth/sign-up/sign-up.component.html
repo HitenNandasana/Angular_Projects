@@ -9,7 +9,8 @@
                     <label for="first_name" class="form-label required">First name</label>
                     <input type="text" class="form-control" name="first_name" id="first_name"
                         formControlName="first_name">
-                    <ng-container *ngIf="signUpForm.invalid && (submit || signUpForm.get('first_name').touched)">
+                    <ng-container
+                        *ngIf="signUpForm.invalid && (submit || signUpForm.get('first_name').touched || signUpForm.get('first_name').dirty)">
                         <small class="text-danger" *ngIf="signUpForm.get('first_name').invalid">First name is
                             Required.</small>
                     </ng-container>
@@ -19,8 +20,10 @@
                     [ngClass]="{'hasError': signUpForm.get('last_name').invalid && (signUpForm.get('last_name').touched || signUpForm.get('last_name').dirty || submit) ,'hasSuccess': signUpForm.get('last_name').valid && (signUpForm.get('last_name').touched || signUpForm.get('last_name').dirty) }">
                     <label for="last_name" class="form-label required">Last name</label>
                     <input type="text" class="form-control" name="last_name" id="last_name" formControlName="last_name">
-                    <ng-container *ngIf="signUpForm.invalid && (submit || signUpForm.get('last_name').touched)">
-                        <small class="text-danger" *ngIf="signUpForm.get('last_name').invalid">Last name is
+                    <ng-container
+                        *ngIf="signUpForm.invalid && (submit || signUpForm.get('last_name').touched || signUpForm.get('last_name').dirty)">
+                        <small class="text-danger" *ngIf="signUpForm.get('last_name').invalid">Last
+                            name is
                             Required.</small>
                     </ng-container>
                 </div>
@@ -31,7 +34,8 @@
                     [ngClass]="{'hasError': signUpForm.get('name').invalid && (signUpForm.get('name').touched || signUpForm.get('name').dirty || submit) ,'hasSuccess': signUpForm.get('name').valid && (signUpForm.get('name').touched || signUpForm.get('name').dirty) }">
                     <label for="name" class="form-label required">Name</label>
                     <input type="text" class="form-control" name="name" id="name" formControlName="name">
-                    <ng-container *ngIf="signUpForm.invalid && (submit || signUpForm.get('name').touched)">
+                    <ng-container
+                        *ngIf="signUpForm.invalid && (submit || signUpForm.get('name').touched || signUpForm.get('name').dirty)">
                         <small class="text-danger" *ngIf="signUpForm.get('name').invalid">Name is Required.</small>
                     </ng-container>
                 </div>
@@ -40,7 +44,8 @@
                     [ngClass]="{'hasError': signUpForm.get('user_name').invalid && (signUpForm.get('user_name').touched || signUpForm.get('user_name').dirty || submit) ,'hasSuccess': signUpForm.get('user_name').valid && (signUpForm.get('user_name').touched || signUpForm.get('user_name').dirty) }">
                     <label for="user_name" class="form-label required">Username</label>
                     <input type="text" class="form-control" name="user_name" id="user_name" formControlName="user_name">
-                    <ng-container *ngIf="signUpForm.invalid && (submit || signUpForm.get('user_name').touched)">
+                    <ng-container
+                        *ngIf="signUpForm.invalid && (submit || signUpForm.get('user_name').touched || signUpForm.get('user_name').dirty)">
                         <small class="text-danger" *ngIf="signUpForm.get('user_name').invalid">Username is
                             Required.</small>
                     </ng-container>
@@ -50,9 +55,14 @@
             <div class="mb-3 form-group"
                 [ngClass]="{'hasError': signUpForm.get('email').invalid && (signUpForm.get('email').touched || signUpForm.get('email').dirty || submit) ,'hasSuccess': signUpForm.get('email').valid && (signUpForm.get('email').touched || signUpForm.get('email').dirty) }">
                 <label for="email" class="form-label required">Email</label>
-                <input type="text" class="form-control" name="email" id="email" formControlName="email">
-                <ng-container *ngIf="signUpForm.invalid && (submit || signUpForm.get('email').touched)">
-                    <small class="text-danger" *ngIf="signUpForm.get('email').invalid">Email is Required.</small>
+                <input type="email" class="form-control" name="email" id="email" formControlName="email"
+                    (keydown)="onkeydown()">
+                <ng-container
+                    *ngIf="signUpForm.invalid && (submit || signUpForm.get('email').touched || signUpForm.get('email').dirty)">
+                    <small class="text-danger" *ngIf="signUpForm.get('email').errors?.['required']">Email is
+                        Required.</small>
+                    <small class="text-danger" *ngIf="signUpForm.get('email').errors?.['pattern']">Email is
+                        Invalid</small>
                 </ng-container>
             </div>
 
@@ -60,26 +70,32 @@
                 [ngClass]="{'hasError': signUpForm.get('password').invalid && (signUpForm.get('password').touched || signUpForm.get('password').dirty || submit) ,'hasSuccess': signUpForm.get('password').valid && (signUpForm.get('password').touched || signUpForm.get('password').dirty) }">
                 <label for="password" class="form-label required">Password</label>
                 <input type="password" class="form-control" name="password" id="password" formControlName="password">
-                <ng-container *ngIf="signUpForm.invalid && (submit || signUpForm.get('password').touched)">
+                <ng-container
+                    *ngIf="signUpForm.invalid && (submit || signUpForm.get('password').touched || signUpForm.get('password').dirty)">
                     <small class="text-danger" *ngIf="signUpForm.get('password').errors?.['required']">Password is
                         Required. </small>
-                    <small class="text-danger"
-                        *ngIf="signUpForm.get('password').dirty && signUpForm.get('password').errors?.['pattern']">Password
-                        must
-                        contain at least one Uppercase latter, one Lowercase letter, one Digit and one Special
-                        charactor.</small>
                 </ng-container>
             </div>
 
             <div class="mb-3 form-group"
-                [ngClass]="{'hasError': signUpForm.get('profile_image').invalid && (signUpForm.get('profile_image').dirty || submit) ,'hasSuccess': signUpForm.get('profile_image').valid && (signUpForm.get('profile_image').dirty) }">
+                [ngClass]="{'hasError': fileHolder === undefined && submit ,'hasSuccess': fileHolder !== undefined }">
                 <label for="profile_image" class="form-label required">Profile Image</label>
-                <input type="file" class="form-control" name="profile_image" id="profile_image"
-                    (change)="onFileSelect($event)" accept="image/*" formControlName="profile_image">
-                <ng-container *ngIf="signUpForm.invalid && (submit)">
-                    <small class="text-danger" *ngIf="signUpForm.get('profile_image').invalid">Profile Image is
+                <input type="file" hidden name="profile_image" id="profile_image" (change)="onFileSelect($event)"
+                    accept="image/*" formControlName="profile_image" #image>
+                <div>
+                    <button type="button" class="btn btn-warning btn-sm rounded" (click)="image.click()"><i
+                            class="fa-solid fa-paperclip text-dark"></i></button>
+                    <span for="image" class="text-dark p-2"> {{
+                        fileHolder?.name}}</span>
+                </div>
+                <ng-container *ngIf="submit">
+                    <small class="text-danger" *ngIf="fileHolder === undefined">Profile Image is
                         Required.</small>
                 </ng-container>
+            </div>
+
+            <div *ngIf="emailCheckMessage" class="mb-3">
+                <small class="text-danger">The email has already taken.</small>
             </div>
 
             <div class="col-12 d-flex align-items-center">

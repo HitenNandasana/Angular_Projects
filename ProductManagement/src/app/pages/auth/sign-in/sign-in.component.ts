@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/appServices/auth/auth.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class SignInComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private authservice: AuthService,
-    private route: Router
+    private route: Router,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +42,7 @@ export class SignInComponent implements OnInit {
       this.authservice.signIn(formData).subscribe(res => {
         this.authservice.setToken(res.data.token);
         console.log(res);
+        this.toastr.success(res.msg);
       },
         error => {
           this.loginCheckMessage = true;
