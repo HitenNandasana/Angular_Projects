@@ -1,0 +1,19 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.example-container {
+    position: absolute;
+    top: 64px;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+}
+
+.example-sidenav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    background: rgba(107, 99, 99, 0.5);
+}
