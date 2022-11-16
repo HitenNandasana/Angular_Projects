@@ -17,18 +17,13 @@
         <mat-sidenav #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="options.value.fixed"
             [fixedTopGap]="options.value.top" [fixedBottomGap]="options.value.bottom">
             <mat-selection-list [multiple]="false">
-                <mat-list-option *ngFor="let item of sideNav">
-                    {{item}}
+                <mat-list-option *ngFor="let item of sideNav" [routerLink]="[item.path]">
+                    {{item.name}}
                 </mat-list-option>
             </mat-selection-list>
         </mat-sidenav>
-        <mat-sidenav-content [formGroup]="options">
-            <div layout="row" layout-margin>
-                <div flex>
-                    Hiten
-                </div>
-            </div>
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
         </mat-sidenav-content>
     </mat-sidenav-container>
 </p>
-<router-outlet></router-outlet>

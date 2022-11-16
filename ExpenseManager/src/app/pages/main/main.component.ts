@@ -14,7 +14,24 @@ export class MainComponent implements OnInit {
     top: 0,
   });
 
-  sideNav = ['Dashboard', 'Income', 'Expense', 'Category'];
+  sideNav = [
+    {
+      path: 'dashboard',
+      name: 'Dashboard'
+    },
+    {
+      path: 'category/income',
+      name: 'Income'
+    },
+    {
+      path: 'category/expense',
+      name: 'Expense'
+    },
+    {
+      path: 'category',
+      name: 'Category'
+    },
+  ];
 
   constructor(private fb: FormBuilder) { }
 

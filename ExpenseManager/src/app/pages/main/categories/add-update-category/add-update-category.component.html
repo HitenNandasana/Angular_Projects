@@ -1,0 +1,25 @@
+<div class="container box">
+    <h1 class="text-primary mt-4 pt-3">Add Category</h1>
+
+    <form class="example-container p-3" [formGroup]="addCategoryForm" (ngSubmit)="add()">
+        <mat-form-field appearance="fill">
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="type">
+                <mat-option value="income" (click)="select()">Income</mat-option>
+                <mat-option value="expense" (click)="select()">Expense</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+                <mat-option [value]="item" *ngFor="let item of category">{{item}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Amount</mat-label>
+            <input matInput type="number" formControlName="amount">
+        </mat-form-field>
+        <button mat-raised-button color="primary">Add</button>
+        <button mat-button color="primary" class="ms-2" (click)="location.back()">Cancel</button>
+    </form>
+</div>
