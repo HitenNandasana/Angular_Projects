@@ -1,7 +1,7 @@
-import { Location } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { CategoryService } from 'src/app/appServices/category/category.service';
 
 @Component({
   selector: 'app-add-update-category',
@@ -16,8 +16,9 @@ export class AddUpdateCategoryComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     public location: Location,
-    private route: Router) { }
-
+    private categoryservice: CategoryService,
+    public datepipe: DatePipe
+  ) { }
 
   ngOnInit(): void {
     this.addCategoryForm = this.fb.group({
@@ -42,9 +43,15 @@ export class AddUpdateCategoryComponent implements OnInit {
   add() {
     this.submit = true;
     if (this.addCategoryForm.valid) {
-      console.log(this.addCategoryForm);
-
-      this.route.navigate(['main/category']);
+      let date = new Date();
+      let today = this.datepipe.transform(date, 'dd-MM-yyyy')
+      let obj = {
+        date: today,
+        type: this.addCategoryForm.get('type').value,
+        category: this.addCategoryForm.get('category').value,
+        amount: this.addCategoryForm.get('amount').value,
+      }
+      this.categoryservice.add(obj);
     }
   }
 

@@ -1,52 +1,31 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common'
-
-
-export interface UserData {
-  id: string;
-  name: string;
-  price: string;
-  date: string | null;
-}
-
-/** Constants used to fill up our data base. */
-const NAMES: string[] = [
-  'Hiten',
-  'Sager',
-  'Ravi'
-];
+import { CategoryData } from 'src/app/models/data';
+import { CategoryService } from 'src/app/appServices/category/category.service';
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
-export class CategoriesComponent implements AfterViewInit {
+export class CategoriesComponent {
 
-  displayedColumns: string[] = ['id', 'name', 'price', 'date', 'actions'];
-  dataSource: MatTableDataSource<UserData>;
+  public categoryList!: CategoryData[];
+  displayedColumns: string[] = ['category', 'amount', 'type', 'date', 'actions'];
+  dataSource!: MatTableDataSource<CategoryData>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private route: Router,
-    public datepipe: DatePipe) {
-    // Create 10 users
-    const users = Array.from({ length: 10 }, (_, k) => this.createNewUser(k + 1));
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
-  }
-  transform(value: any, ...args: any[]) {
-    throw new Error('Method not implemented.');
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    public datepipe: DatePipe,
+    private categoryservice: CategoryService
+  ) {
+    this.getList();
   }
 
   applyFilter(event: Event) {
@@ -62,20 +41,21 @@ export class CategoriesComponent implements AfterViewInit {
     this.route.navigate(['main/category/add']);
   }
 
+  editCategory() {
+  }
 
-  /** Builds and returns a new User. */
-  createNewUser(this: any, id: number): UserData {
-    const name =
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))];
+  deleteCategory() {
+  }
 
-    let date = new Date();
-    let today = this.datepipe.transform(date, 'dd-MM-yyyy')
-
-    return {
-      id: id.toString(),
-      name: name,
-      price: Math.round(Math.random() * 100).toString(),
-      date: today,
-    };
+  async getList() {
+    let category: CategoryData[];
+    await this.categoryservice.getCategoryData().then(value => {
+      category = value as CategoryData[];
+      this.categoryList = category;
+    })
+    this.categoryservice.id.next(this.categoryList.length);
+    this.dataSource = new MatTableDataSource(this.categoryList);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 }
