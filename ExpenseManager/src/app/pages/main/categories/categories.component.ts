@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -19,7 +19,7 @@ export class CategoriesComponent {
   dataSource!: MatTableDataSource<CategoryData>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
   constructor(private route: Router,
     public datepipe: DatePipe,
@@ -41,10 +41,16 @@ export class CategoriesComponent {
     this.route.navigate(['main/category/add']);
   }
 
-  editCategory() {
+  editCategory(data: any) {
+    this.categoryservice.editCategoryObj.next(data);
+    this.route.navigate(['main/category/edit', data.id]);
   }
 
-  deleteCategory() {
+  deleteCategory(data: any) {
+    if (confirm('Do you really want to Delete this?')) {
+      this.categoryservice.delete(data);
+      this.getList();
+    }
   }
 
   async getList() {
@@ -52,8 +58,10 @@ export class CategoriesComponent {
     await this.categoryservice.getCategoryData().then(value => {
       category = value as CategoryData[];
       this.categoryList = category;
+      this.categoryservice.id.next(this.categoryList[this.categoryList.length - 1].id);
+    }).catch(error => {
+      // console.log(error);
     })
-    this.categoryservice.id.next(this.categoryList.length);
     this.dataSource = new MatTableDataSource(this.categoryList);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

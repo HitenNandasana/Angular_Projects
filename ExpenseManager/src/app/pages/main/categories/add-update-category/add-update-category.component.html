@@ -1,5 +1,5 @@
 <div class="container box">
-    <h1 class="text-primary mt-4 pt-3">Add Category</h1>
+    <h1 class="text-primary mt-4 pt-3">{{this.categoryId ? 'Edit' : 'Add'}} Category</h1>
 
     <form class="example-container p-3" [formGroup]="addCategoryForm" (ngSubmit)="add()">
         <mat-form-field appearance="fill">
@@ -17,9 +17,9 @@
         </mat-form-field>
         <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Amount</mat-label>
-            <input matInput type="number" formControlName="amount">
+            <input matInput type="number" formControlName="amount" (keypress)="isNumber($event)">
         </mat-form-field>
-        <button mat-raised-button color="primary">Add</button>
-        <button mat-button color="primary" class="ms-2" (click)="location.back()">Cancel</button>
+        <button mat-raised-button color="primary">{{this.categoryId ? 'Update' : 'Add'}}</button>
+        <button mat-button color="primary" class="ms-2" type="button" (click)="location.back()">Cancel</button>
     </form>
 </div>
