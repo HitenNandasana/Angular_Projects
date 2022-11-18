@@ -1,0 +1,38 @@
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+td,
+th {
+    width: 25%;
+}
+
+th {
+    color: orange;
+    font-size: medium;
+    background-color: black;
+}
+
+tr,
+mat-paginator {
+    background-color: lightgrey;
+}
+
+.income {
+    color: green;
+    font-weight: 500;
+}
+
+.expense {
+    color: red;
+    font-weight: 500;
+}
+
+.addbtn {
+    padding-right: 21px;
+}

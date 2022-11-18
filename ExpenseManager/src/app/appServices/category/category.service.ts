@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Router } from '@angular/router';
@@ -15,7 +16,8 @@ export class CategoryService {
 
   constructor(private route: Router,
     private db: AngularFireDatabase,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public location: Location
   ) { }
 
   async add(obj: any) {
@@ -27,7 +29,7 @@ export class CategoryService {
     obj.id = id;
     await this.db.object(`CategoryData/${id}`).set(obj);
     this.toastr.success('Data added successfully');
-    this.route.navigate(['main/category']);
+    this.location.back();
   }
 
   async delete(data: any) {
@@ -38,7 +40,7 @@ export class CategoryService {
   async update(obj: any) {
     await this.db.object(`CategoryData/${obj.id}`).set(obj);
     this.toastr.success('Data updated successfully');
-    this.route.navigate(['main/category']);
+    this.location.back()
     this.editCategoryObj.next('');
   }
 

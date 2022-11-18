@@ -15,4 +15,24 @@ th {
 th {
     color: orange;
     font-size: medium;
+    background-color: black;
+}
+
+tr,
+mat-paginator {
+    background-color: lightgrey;
+}
+
+.income {
+    color: green;
+    font-weight: 500;
+}
+
+.expense {
+    color: red;
+    font-weight: 500;
+}
+
+.addbtn {
+    padding-right: 21px;
 }
