@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -14,6 +14,7 @@ import { CategoryService } from 'src/app/appServices/category/category.service';
 })
 export class CategoriesComponent {
 
+  temp = false;
   public categoryList!: CategoryData[];
   displayedColumns: string[] = ['category', 'amount', 'type', 'date', 'actions'];
   dataSource!: MatTableDataSource<CategoryData>;
@@ -61,9 +62,25 @@ export class CategoriesComponent {
       this.categoryservice.id.next(this.categoryList[this.categoryList.length - 1].id);
     }).catch(error => {
       // console.log(error);
+      this.temp = true
     })
     this.dataSource = new MatTableDataSource(this.categoryList);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  sortDate() {
+    this.dataSource.sortingDataAccessor = (item: any, property) => {
+      console.log(typeof property);
+      switch (property) {
+        case 'date': {
+          let newDate = new Date(item.date);
+          return newDate;
+        }
+        default: {
+          return item[property];
+        }
+      }
+    };
   }
 }
