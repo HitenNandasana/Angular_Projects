@@ -4,7 +4,8 @@ table {
 
 .mat-form-field {
     font-size: 14px;
-    width: 100%;
+    display: flex;
+    justify-content: end;
 }
 
 td,
@@ -15,7 +16,7 @@ th {
 th {
     color: orange;
     font-size: medium;
-    background-color: black;
+    background-color: ghostwhite;
 }
 
 tr,

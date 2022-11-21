@@ -1,0 +1,56 @@
+.rupee {
+    font-weight: 600;
+    font-size: x-large;
+}
+
+p {
+    text-align: right;
+}
+
+.income {
+    background-color: aquamarine;
+}
+
+.expense {
+    background-color: bisque;
+}
+
+.profit {
+    background-color: green;
+    color: white;
+}
+
+.loss {
+    background-color: red;
+    color: white;
+}
+
+.top-box {
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    display: flex;
+    justify-content: end;
+}
+
+td,
+th {
+    width: 25%;
+}
+
+th {
+    color: orange;
+    font-size: medium;
+    background-color: ghostwhite;
+}
+
+tr,
+mat-paginator {
+    background-color: lightgrey;
+}

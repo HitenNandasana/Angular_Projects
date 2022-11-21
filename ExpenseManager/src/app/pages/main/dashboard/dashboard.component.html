@@ -1,1 +1,180 @@
-<p>dashboard works!</p>
+<div class="container">
+    <div class="rounded header">
+        <div class="row mt-4 d-flex">
+            <div class="col-11">
+                <h1 class="ps-2" style="color: #ff4081;">Dashboard</h1>
+            </div>
+            <div class="justify-content-end d-flex align-items-center addbtn col-1">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 p-3 mat-elevation-z8 rounded box">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="top-box income m-3 p-1">
+                    <h1>Income</h1>
+                    <p>Total : <span class="rupee"> {{income | currency:'INR':'symbol'}}</span></p>
+                    <!-- <div class="d-flex justify-content-end pb-3">
+                        <button mat-raised-button color="accent" class="viewbtn">View</button>
+                    </div> -->
+                    <mat-progress-bar mode="indeterminate" *ngIf="!income"></mat-progress-bar>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="top-box expense m-3 p-1">
+                    <h1>Expense</h1>
+                    <p>Total : <span class="rupee"> {{expense | currency:'INR':'symbol'}}</span></p>
+                    <mat-progress-bar mode="indeterminate" *ngIf="!expense"></mat-progress-bar>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="top-box m-3 p-1" [ngClass]="{'profit': balance >= 0, 'loss':balance<0}">
+                    <h1>Balance</h1>
+                    <p>Total : <span class="rupee"> {{balance | currency:'INR':'symbol' }}</span></p>
+                    <mat-progress-bar mode="indeterminate" *ngIf="!balance"></mat-progress-bar>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <h4 class="">Top 5 Recent Incomes</h4>
+            <mat-form-field appearance="standard">
+                <mat-label class="text-secondary">Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event,'income')" placeholder="Ex. Mia" #input>
+            </mat-form-field>
+
+            <div class="border">
+                <table mat-table [dataSource]="incomeDataSource" #incomesort="matSort" matSort matSortActive="id"
+                    matSortDirection="desc" matSortDisableClear (matSortChange)="sortDate('income')">
+
+                    <ng-container matColumnDef="category">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+                        <td mat-cell *matCellDef="let row"> {{row.category}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="amount">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+                        <td mat-cell *matCellDef="let row"> &#8377;{{row.amount}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Date
+                        </th>
+                        <td mat-cell *matCellDef="let row"> {{row.date | date}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef> Actions </th>
+                        <td mat-cell *matCellDef="let row">
+                            <button mat-icon-button [matMenuTriggerFor]="menu"
+                                aria-label="Example icon-button with a menu">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="edit(row)">
+                                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="edit"
+                                        class="text-primary"></mat-icon>
+                                    <span>Edit</span>
+                                </button>
+                                <button mat-menu-item (click)="delete(row)">
+                                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete"
+                                        class="text-danger">
+                                    </mat-icon>
+                                    <span>Delete</span>
+                                </button>
+                            </mat-menu>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="5" *ngIf="!temp">No data matching the filter "{{input.value}}"
+                        </td>
+                        <td class="mat-cell" colspan="5" *ngIf="temp" class="text-center text-danger fs-4">No Record
+                            Found</td>
+                    </tr>
+                </table>
+
+                <mat-progress-spinner *ngIf="!incomeDataSource" class="example-margin m-auto mt-4 mb-4" color="primary"
+                    mode="indeterminate" value="value">
+                </mat-progress-spinner>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h4 class="">Top 5 Recent Expenses</h4>
+            <mat-form-field appearance="standard">
+                <mat-label class="text-secondary">Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event,'expense')" placeholder="Ex. Mia" #input>
+            </mat-form-field>
+
+            <div class="border">
+                <table mat-table [dataSource]="expenseDataSource" #expensesort="matSort" matSort matSortActive="id"
+                    matSortDirection="desc" matSortDisableClear (matSortChange)="sortDate('expense')">
+
+                    <ng-container matColumnDef="category">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+                        <td mat-cell *matCellDef="let row"> {{row.category}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="amount">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+                        <td mat-cell *matCellDef="let row"> &#8377;{{row.amount}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Date
+                        </th>
+                        <td mat-cell *matCellDef="let row"> {{row.date | date}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef> Actions </th>
+                        <td mat-cell *matCellDef="let row">
+                            <button mat-icon-button [matMenuTriggerFor]="menu"
+                                aria-label="Example icon-button with a menu">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="edit(row)">
+                                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="edit"
+                                        class="text-primary"></mat-icon>
+                                    <span>Edit</span>
+                                </button>
+                                <button mat-menu-item (click)="delete(row)">
+                                    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete"
+                                        class="text-danger">
+                                    </mat-icon>
+                                    <span>Delete</span>
+                                </button>
+                            </mat-menu>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="5" *ngIf="!temp">No data matching the filter "{{input.value}}"
+                        </td>
+                        <td class="mat-cell" colspan="5" *ngIf="temp" class="text-center text-danger fs-4">No Record
+                            Found</td>
+                    </tr>
+                </table>
+
+                <mat-progress-spinner *ngIf="!expenseDataSource" class="example-margin m-auto mt-4 mb-4" color="primary"
+                    mode="indeterminate" value="value">
+                </mat-progress-spinner>
+
+            </div>
+        </div>
+    </div>
+</div>

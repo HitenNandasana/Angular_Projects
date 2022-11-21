@@ -40,8 +40,8 @@ export class AddUpdateCategoryComponent implements OnInit {
     this.select();
   }
 
-  categoryIncomeOptions: string[] = ['Salary', 'Rent', 'Deposit'];
-  categoryExpenseOptions: string[] = ['Food', 'Fuel', 'Grocery', 'Eletronics', 'Other'];
+  categoryIncomeOptions: string[] = ['Salary', 'Rent', 'Deposit', 'Saving'];
+  categoryExpenseOptions: string[] = ['Food', 'Fuel', 'Grocery', 'Eletronics', 'Travel', 'Shopping', 'Medical', 'Movie', 'Other'].sort();
 
   select() {
     if (this.addCategoryForm.value.type === 'income') {
