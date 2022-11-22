@@ -4,16 +4,23 @@ import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing.module';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatModule } from 'src/app/appModules/mat.module';
+import { NoWhiteSpaceValidatorDirective } from '../../directive/no-white-space-validator.directive';
 
 
 @NgModule({
   declarations: [
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    NoWhiteSpaceValidatorDirective
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatModule
   ]
 })
 export class AuthModule { }

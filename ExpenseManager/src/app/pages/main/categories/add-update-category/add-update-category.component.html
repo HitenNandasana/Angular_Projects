@@ -9,15 +9,21 @@
                 <mat-option value="expense" (click)="select()">Expense</mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" class="mb-3">
             <mat-label>Category</mat-label>
             <mat-select formControlName="category">
                 <mat-option [value]="item" *ngFor="let item of category">{{item}}</mat-option>
             </mat-select>
+            <mat-error *ngIf="addCategoryForm.get('category').hasError('required')">
+                Category is required.
+            </mat-error>
         </mat-form-field>
-        <mat-form-field class="example-full-width" appearance="outline">
+        <mat-form-field class="example-full-width mb-3" appearance="outline">
             <mat-label>Amount</mat-label>
             <input matInput type="number" formControlName="amount" (keypress)="isNumber($event)">
+            <mat-error *ngIf="addCategoryForm.get('amount').hasError('required')">
+                Amount is required.
+            </mat-error>
         </mat-form-field>
         <button mat-raised-button color="primary">{{this.categoryId ? 'Update' : 'Add'}}</button>
         <button mat-button color="primary" class="ms-2" type="button" (click)="location.back()">Cancel</button>
