@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SignInGuard } from 'src/app/guards/auth/sign-in.guard';
+import { SignInGuard } from 'src/app/guards/sign-in/sign-in.guard';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
