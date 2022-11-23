@@ -58,7 +58,7 @@
 
             <div class="col-12 d-flex align-items-center">
                 <button type="submit" class="btn btn-primary">Sign Up</button>
-                <a [routerLink]="['/signin']" routerLinkActive="router-link-active"
+                <a type="button" (click)="authservice.onNavigate('/signin')"
                     class="text-decoration-none ms-3">Cancel</a>
             </div>
         </form>

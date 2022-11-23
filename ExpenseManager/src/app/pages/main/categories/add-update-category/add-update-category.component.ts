@@ -17,6 +17,13 @@ export class AddUpdateCategoryComponent implements OnInit {
   categoryId: any;
   editCategoryObj: any;
 
+  // fruits = [
+  //   // 'apple', 'banana', 'chickoo'
+  //   { 'apple': false },
+  //   { 'banana': false },
+  //   { 'chickoo': false },
+  // ]
+
   constructor(private fb: FormBuilder,
     public location: Location,
     private categoryservice: CategoryService,
@@ -35,8 +42,10 @@ export class AddUpdateCategoryComponent implements OnInit {
     this.addCategoryForm = this.fb.group({
       'type': [this.categoryId ? this.editCategoryObj.type : 'income', Validators.required],
       'category': [this.categoryId ? this.editCategoryObj.category : '', Validators.required],
-      'amount': [this.categoryId ? this.editCategoryObj.amount : '', Validators.required]
+      'amount': [this.categoryId ? this.editCategoryObj.amount : '', Validators.required],
+      // 'fruits': this.fb.array(this.fruits.map(f => this.fb.control(true)))
     })
+
     this.select();
   }
 
@@ -70,6 +79,7 @@ export class AddUpdateCategoryComponent implements OnInit {
           category: this.addCategoryForm.get('category').value,
           amount: this.addCategoryForm.get('amount').value,
         }
+        console.log(this.addCategoryForm.value);
         this.categoryservice.add(obj);
       } else if (this.categoryId) {
 

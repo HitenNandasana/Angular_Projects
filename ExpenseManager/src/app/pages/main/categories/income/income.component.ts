@@ -53,10 +53,9 @@ export class IncomeComponent {
     await this.categoryservice.getCategoryData().then(value => {
       income = value as CategoryData[];
       this.incomeList = income;
-      this.incomeList = this.incomeList.filter(res => 
+      this.incomeList = this.incomeList.filter(res =>
         res.type === 'income'
       );
-      console.log(this.incomeList);
       this.categoryservice.id.next(this.incomeList[this.incomeList.length - 1].id);
     }).catch(error => {
       // console.log(error);

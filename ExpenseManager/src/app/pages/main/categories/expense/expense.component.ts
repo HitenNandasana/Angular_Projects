@@ -56,7 +56,6 @@ export class ExpenseComponent {
       this.expenseList = this.expenseList.filter(res =>
         res.type === 'expense'
       );
-      console.log(this.expenseList);
       this.categoryservice.id.next(this.expenseList[this.expenseList.length - 1].id);
     }).catch(error => {
       // console.log(error);

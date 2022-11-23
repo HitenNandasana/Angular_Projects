@@ -16,7 +16,7 @@ export class SignInComponent implements OnInit {
   loginCheckMessage = false;;
 
   constructor(private fb: FormBuilder,
-    private authservice: AuthService,
+    public authservice: AuthService,
   ) {
     this.authservice.loggedIn.subscribe(res => {
       this.loggedIn = res;
@@ -63,5 +63,6 @@ export class SignInComponent implements OnInit {
         });
     }
   }
+
 
 }

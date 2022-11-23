@@ -11,7 +11,8 @@
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
             <mat-icon>share</mat-icon>
         </button>
-        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="logout()">
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
+            (click)="logout()">
             <mat-icon>logout</mat-icon>
         </button>
     </mat-toolbar>
@@ -20,7 +21,7 @@
         <mat-sidenav #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="options.value.fixed"
             [fixedTopGap]="options.value.top" [fixedBottomGap]="options.value.bottom">
             <mat-selection-list [multiple]="false">
-                <mat-list-option *ngFor="let item of sideNav" [routerLink]="[item.path]">
+                <mat-list-option *ngFor="let item of sideNav" (click)="onNavigate(item.path)">
                     {{item.name}}
                 </mat-list-option>
             </mat-selection-list>

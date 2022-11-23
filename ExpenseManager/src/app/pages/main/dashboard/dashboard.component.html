@@ -19,21 +19,21 @@
                     <!-- <div class="d-flex justify-content-end pb-3">
                         <button mat-raised-button color="accent" class="viewbtn">View</button>
                     </div> -->
-                    <mat-progress-bar mode="indeterminate" *ngIf="!income"></mat-progress-bar>
+                    <mat-progress-bar mode="indeterminate" *ngIf="income === undefined"></mat-progress-bar>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="top-box expense m-3 p-1">
                     <h1>Expense</h1>
                     <p>Total : <span class="rupee"> {{expense | currency:'INR':'symbol'}}</span></p>
-                    <mat-progress-bar mode="indeterminate" *ngIf="!expense"></mat-progress-bar>
+                    <mat-progress-bar mode="indeterminate" *ngIf="expense === undefined"></mat-progress-bar>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="top-box m-3 p-1" [ngClass]="{'profit': balance >= 0, 'loss':balance<0}">
                     <h1>Balance</h1>
                     <p>Total : <span class="rupee"> {{balance | currency:'INR':'symbol' }}</span></p>
-                    <mat-progress-bar mode="indeterminate" *ngIf="!balance"></mat-progress-bar>
+                    <mat-progress-bar mode="indeterminate" *ngIf="balance === undefined"></mat-progress-bar>
                 </div>
             </div>
         </div>
@@ -95,9 +95,11 @@
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
                     <tr class="mat-row" *matNoDataRow>
-                        <td class="mat-cell" colspan="5" *ngIf="!temp">No data matching the filter "{{input.value}}"
+                        <td class="mat-cell" colspan="5" *ngIf="income !== 0">No data matching the filter
+                            "{{input.value}}"
                         </td>
-                        <td class="mat-cell" colspan="5" *ngIf="temp" class="text-center text-danger fs-4">No Record
+                        <td class="mat-cell" colspan="5" *ngIf="income === 0" class="text-center text-danger fs-4">No
+                            Record
                             Found</td>
                     </tr>
                 </table>
@@ -163,9 +165,11 @@
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
                     <tr class="mat-row" *matNoDataRow>
-                        <td class="mat-cell" colspan="5" *ngIf="!temp">No data matching the filter "{{input.value}}"
+                        <td class="mat-cell" colspan="5" *ngIf="expense !== 0">No data matching the filter
+                            "{{input.value}}"
                         </td>
-                        <td class="mat-cell" colspan="5" *ngIf="temp" class="text-center text-danger fs-4">No Record
+                        <td class="mat-cell" colspan="5" *ngIf="expense === 0" class="text-center text-danger fs-4">No
+                            Record
                             Found</td>
                     </tr>
                 </table>

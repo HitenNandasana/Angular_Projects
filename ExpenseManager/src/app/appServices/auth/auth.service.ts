@@ -85,4 +85,8 @@ export class AuthService {
 
     });
   }
+
+  onNavigate(path: string) {
+    this.route.navigate([path]);
+  }
 }

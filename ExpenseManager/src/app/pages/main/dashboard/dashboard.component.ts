@@ -95,11 +95,9 @@ export class DashboardComponent {
     let recentIncomeList = this.incomeList.slice(-5);
     let recentExpenseList = this.expenseList.slice(-5);
     this.incomeDataSource = new MatTableDataSource(recentIncomeList);
-    // this.incomeDataSource.paginator = this.incomepaginator;
     this.incomeDataSource.sort = this.incomesort;
 
     this.expenseDataSource = new MatTableDataSource(recentExpenseList);
-    // this.expenseDataSource.paginator = this.expensepaginator;
     this.expenseDataSource.sort = this.expensesort;
   }
 

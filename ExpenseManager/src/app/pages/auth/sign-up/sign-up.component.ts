@@ -15,7 +15,7 @@ export class SignUpComponent implements OnInit {
   emailCheckMessage: boolean = false;
 
   constructor(private fb: FormBuilder,
-    private authservice: AuthService) {
+    public authservice: AuthService) {
     this.authservice.getList();
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/appServices/auth/auth.service';
 
 @Component({
@@ -40,6 +40,7 @@ export class MainComponent implements OnInit {
     private authservice: AuthService) { }
 
   ngOnInit(): void {
+
   }
 
   logout() {
@@ -49,5 +50,7 @@ export class MainComponent implements OnInit {
       this.route.navigate(['']);
     }
   }
-
+  onNavigate(path: string) {
+    this.route.navigate([`main/${path}`]);
+  }
 }

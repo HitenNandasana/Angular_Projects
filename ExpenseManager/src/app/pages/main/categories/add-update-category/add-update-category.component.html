@@ -25,6 +25,28 @@
                 Amount is required.
             </mat-error>
         </mat-form-field>
+        <!-- <div formArrayName="fruits"> -->
+        <!-- <h4>Select your toppings:</h4>
+        <p>
+            <mat-checkbox formControlName="apple">apple</mat-checkbox>
+        </p>
+        <p>
+            <mat-checkbox formControlName="banana">banana</mat-checkbox>
+        </p>
+        <p>
+            <mat-checkbox formControlName="chickoo">chickoo</mat-checkbox>
+        </p> -->
+        <!-- </div> -->
+
+        <!-- <div class="form-group overflow" formArrayName="fruits">
+            <div *ngFor="let site of fruits; let i = index">
+                <input type="checkbox" [id]="i" [formControlName]="i" [value]="site" />
+                <div [innerHTML]="site"></div>
+            </div>
+        </div> -->
+
+
+
         <button mat-raised-button color="primary">{{this.categoryId ? 'Update' : 'Add'}}</button>
         <button mat-button color="primary" class="ms-2" type="button" (click)="location.back()">Cancel</button>
     </form>
