@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
   }
   signout() {
     localStorage.removeItem('Token');
-    this.toastr.success('Sign Out successfully');
+    // this.toastr.success('Sign Out successfully');
     this.route.navigate(['']);
   }
 

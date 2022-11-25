@@ -12,11 +12,10 @@ export class SignInGuard implements CanActivate {
     private route: Router) {
   }
   canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     if (this.authservice.getToken()) {
-      return this.route.createUrlTree(['dashboard']);
+      return this.route.navigate(['dashboard']);
     }
     return true;
   }
