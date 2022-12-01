@@ -43,13 +43,11 @@ export class SignInComponent implements OnInit {
         this.authservice.setToken(res.data.token);
         console.log(res);
         this.toastr.success(res.msg);
+        this.route.navigate(['/dashboard']);
       },
         error => {
           this.loginCheckMessage = true;
         });
-      setTimeout(() => {
-        this.route.navigate(['/dashboard']);
-      }, 300);;
       this.submit = false;
     }
   }

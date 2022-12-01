@@ -34,13 +34,13 @@ describe('AuthGuard', () => {
 
   it('be able to hit route when user is logged in', () => {
     expect(authService instanceof (AuthService)).toBeTruthy();
-    jasmine.createSpy('getToken').and.returnValue(true);
+    jasmine.createSpy('getToken')?.and.returnValue(true);
     expect(guard.canActivate()).toBe(true);
   });
 
   it('not be able to hit route when user is not logged in', () => {
     expect(authService instanceof (AuthService)).toBeTruthy();
-    jasmine.createSpy('getToken').and.returnValue(false);
+    jasmine.createSpy('getToken')?.and.returnValue(false);
     expect(guard.canActivate()).toBe(false);
   });
 });

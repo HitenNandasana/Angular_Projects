@@ -28,30 +28,14 @@ describe('DashboardComponent', () => {
     fixture.detectChanges();
   });
 
-  // beforeEach(() => {
-  //   let store: any = {};
-  //   const mockLocalStorage = {
-  //     removeItem: (key: string) => {
-  //       delete store[key];
-  //     },
-  //   };
-  //   spyOn(localStorage, 'removeItem')
-  //     .and.callFake(mockLocalStorage.removeItem);
-
-
-  //   const localStorageRefServiceSpy = jasmine.createSpyObj('LocalStorageRef', ['getLocalStorage']);
-  //   const getLocalStorageSpy = jasmine.createSpyObj('LocalStorageRef.getLocalStorage', ['getItem', 'setItem', 'removeItem']);
-  //   localStorageRefServiceSpy.getLocalStorage.and.returnValue(getLocalStorageSpy);
-  //   getLocalStorageSpy.removeItem.and.callFake(mockLocalStorage.removeItem);
-  // });
-
-
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
   it('should have signOut method', () => {
+    spyOn(component, 'signout').and.callThrough();
+    component.signout();
     expect(component.signout).toBeTruthy();
-    // expect(mockLocalStorage.removeItem('Token')).toBeUndefined();
+    expect(router.navigate).toHaveBeenCalledWith(['']);
   });
 });

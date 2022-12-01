@@ -34,11 +34,11 @@ describe('AppInterceptor', () => {
     expect(interceptor).toBeTruthy();
   });
 
-  it('should be created', fakeAsync(() => {
+  it('should be intercept created', fakeAsync(() => {
     const interceptor: AppInterceptor = TestBed.inject(AppInterceptor);
     tick();
     interceptor.intercept(requestMock, next).subscribe(() => {
-      expect(interceptor.authRequest).toBe(true);
+      expect(interceptor.intercept).toBe(true);
     });
   }));
 

@@ -1,6 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrModule } from 'ngx-toastr';
@@ -33,6 +32,10 @@ describe('ProductComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
+  afterAll(() => {
+    localStorage.removeItem('Product');
+  })
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -72,7 +75,6 @@ describe('ProductComponent', () => {
   });
 
   it('should have deleteProduct method Called', () => {
-    let productList = productService.getProductData();
     const index = 3;
     const obj = {
       id: '12',
@@ -82,7 +84,7 @@ describe('ProductComponent', () => {
       price: '5445',
       image: 'gfg.png'
     }
-    spyOn(component, 'editProduct').and.callThrough();
+    spyOn(component, 'deleteProduct').and.callThrough();
     component.deleteProduct(index, obj);
     expect(productService.getProductData).not.toContain(obj);
   });

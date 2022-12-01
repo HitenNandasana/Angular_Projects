@@ -81,7 +81,7 @@
                 [ngClass]="{'hasError': fileHolder === undefined && submit ,'hasSuccess': fileHolder !== undefined }">
                 <label for="profile_image" class="form-label required">Profile Image</label>
                 <input type="file" hidden name="profile_image" id="profile_image" (change)="onFileSelect($event)"
-                    accept="image/*" formControlName="profile_image" #image>
+                    accept="image/*" #image>
                 <div>
                     <button type="button" class="btn btn-warning btn-sm rounded" (click)="image.click()"><i
                             class="fa-solid fa-paperclip text-dark"></i></button>
