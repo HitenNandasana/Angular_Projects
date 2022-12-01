@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 
@@ -9,6 +10,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
 
   constructor(private http: HttpClient) { }
+
 
   signUp(data: FormData) {
     return this.http.post<any>(environment.baseApi + 'register', data);
@@ -23,6 +25,10 @@ export class AuthService {
   }
 
   getToken() {
-    return localStorage.getItem('Token');
+    if (localStorage.getItem('Token')) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

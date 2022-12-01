@@ -24,6 +24,7 @@ export class AddUpdateProductComponent implements OnInit {
     public location: Location,
     private productservice: ProductService,
     private toastr: ToastrService,
+    private route: Router,
     private avticeroute: ActivatedRoute) {
 
     this.productservice.ediProductObj.subscribe(res => {
@@ -39,7 +40,7 @@ export class AddUpdateProductComponent implements OnInit {
     this.addProductForm = this.fb.group({
       'name': [this.productId ? this.ediProductObj.name : '', [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
       'slug': [{ value: this.productId ? this.ediProductObj.slug : '', disabled: this.productId ? true : false }, [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
-      'description': [{ value: this.productId ? this.ediProductObj.description : '', disabled: this.productId ? true : false }, [Validators.required, Validators.pattern("^[a-zA-Z].*")]],
+      'description': [{ value: this.productId ? this.ediProductObj.description : '', disabled: this.productId ? true : false }, [Validators.required, Validators.pattern("^[a-zA-Z0-9].*")]],
       'price': [{ value: this.productId ? Number(this.ediProductObj.price) : '', disabled: this.productId ? true : false }, [Validators.required, Validators.pattern("[1-9].*")]],
       'image': [{ value: '', disabled: this.productId ? true : false }, Validators.required]
     })
@@ -48,6 +49,7 @@ export class AddUpdateProductComponent implements OnInit {
   onFileSelect(event: any) {
     if (event.target.files && event.target.files.length) {
       this.fileHolder = event.target.files[0];
+      this.addProductForm.get('image').setValue(this.fileHolder);
     }
   }
 
@@ -63,24 +65,48 @@ export class AddUpdateProductComponent implements OnInit {
   add() {
     this.submit = true;
     if (this.addProductForm.valid) {
-      if (!this.productId && this.fileHolder && this.fileHolder.name) {
+      if (!this.productId && this.addProductForm.value.image) {
         const formData = new FormData();
 
         formData.append('name', this.addProductForm.value.name);
         formData.append('slug', this.addProductForm.value.slug);
         formData.append('description', this.addProductForm.value.description);
         formData.append('price', this.addProductForm.value.price);
-        formData.append('image', this.fileHolder, this.fileHolder.name);
+        formData.append('image', this.addProductForm.value.image);
 
 
-        this.productservice.add(formData, this.fileHolder.name);
-      } else if (this.productId) {
+        this.productservice.add(formData).subscribe(res => {
+          console.log(res);
+          let dataList = this.productservice.getProductData();
+          let object = res.data;
+          object.imgName = this.addProductForm.value.image;
+          dataList.push(object);
+          this.productservice.setProductData(dataList);
+          this.route.navigate(['dashboard/product']);
+          this.toastr.success('Product added successfully');
+        });
+      } else {
         const formData = new FormData();
 
         formData.append('id', this.ediProductObj.id);
         formData.append('name', this.addProductForm.value.name);
 
-        this.productservice.update(formData);
+        this.productservice.update(formData).subscribe(res => {
+          console.log(res);
+          let dataList = this.productservice.getProductData();
+          let arr = dataList.map((obj: any) => {
+            if (obj.id === Number(formData.get('id'))) {
+              let object = res.data;
+              object.imgName = obj.imgName;
+              return object;
+            }
+            return obj;
+          })
+          this.productservice.setProductData(arr);
+          this.route.navigate(['dashboard/product']);
+          this.toastr.success('Product updated successfully');
+        });
+        this.ediProductObj.next('');
       }
       this.submit = false;
     }

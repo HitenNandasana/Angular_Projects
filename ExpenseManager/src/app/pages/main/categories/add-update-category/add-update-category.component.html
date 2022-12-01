@@ -1,0 +1,53 @@
+<div class="container box">
+    <h1 class="text-primary mt-4 pt-3">{{this.categoryId ? 'Edit' : 'Add'}} Category</h1>
+
+    <form class="example-container p-3" [formGroup]="addCategoryForm" (ngSubmit)="add()">
+        <mat-form-field appearance="fill">
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="type">
+                <mat-option value="income" (click)="select()">Income</mat-option>
+                <mat-option value="expense" (click)="select()">Expense</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="mb-3">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+                <mat-option [value]="item" *ngFor="let item of category">{{item}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="addCategoryForm.get('category').hasError('required')">
+                Category is required.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <mat-label>Amount</mat-label>
+            <input matInput type="number" formControlName="amount" (keypress)="isNumber($event)">
+            <mat-error *ngIf="addCategoryForm.get('amount').hasError('required')">
+                Amount is required.
+            </mat-error>
+        </mat-form-field>
+        <!-- <div formArrayName="fruits"> -->
+        <!-- <h4>Select your toppings:</h4>
+        <p>
+            <mat-checkbox formControlName="apple">apple</mat-checkbox>
+        </p>
+        <p>
+            <mat-checkbox formControlName="banana">banana</mat-checkbox>
+        </p>
+        <p>
+            <mat-checkbox formControlName="chickoo">chickoo</mat-checkbox>
+        </p> -->
+        <!-- </div> -->
+
+        <!-- <div class="form-group overflow" formArrayName="fruits">
+            <div *ngFor="let site of fruits; let i = index">
+                <input type="checkbox" [id]="i" [formControlName]="i" [value]="site" />
+                <div [innerHTML]="site"></div>
+            </div>
+        </div> -->
+
+
+
+        <button mat-raised-button color="primary">{{this.categoryId ? 'Update' : 'Add'}}</button>
+        <button mat-button color="primary" class="ms-2" type="button" (click)="location.back()">Cancel</button>
+    </form>
+</div>

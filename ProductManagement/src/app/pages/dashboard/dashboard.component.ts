@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/appServices/auth/auth.service';
 
 @Component({
@@ -9,12 +10,14 @@ import { AuthService } from 'src/app/appServices/auth/auth.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private route: Router) { }
+  constructor(private route: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
   signout() {
     localStorage.removeItem('Token');
+    // this.toastr.success('Sign Out successfully');
     this.route.navigate(['']);
   }
 
