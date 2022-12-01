@@ -91,22 +91,23 @@ export class AddUpdateProductComponent implements OnInit {
         formData.append('id', this.ediProductObj.id);
         formData.append('name', this.addProductForm.value.name);
 
-        this.productservice.update(formData).subscribe(res => {
-          console.log(res);
-          let dataList = this.productservice.getProductData();
-          let arr = dataList.map((obj: any) => {
-            if (obj.id === Number(formData.get('id'))) {
-              let object = res.data;
-              object.imgName = obj.imgName;
-              return object;
-            }
-            return obj;
-          })
-          this.productservice.setProductData(arr);
-          this.route.navigate(['dashboard/product']);
-          this.toastr.success('Product updated successfully');
-        });
-        this.ediProductObj.next('');
+        this.productservice.update(formData);
+        // .subscribe(res => {
+        //   console.log(res);
+        //   let dataList = this.productservice.getProductData();
+        //   let arr = dataList.map((obj: any) => {
+        //     if (obj.id === Number(formData.get('id'))) {
+        //       let object = res.data;
+        //       object.imgName = obj.imgName;
+        //       return object;
+        //     }
+        //     return obj;
+        //   })
+        //   this.productservice.setProductData(arr);
+        //   this.route.navigate(['dashboard/product']);
+        //   this.toastr.success('Product updated successfully');
+        // });
+        // this.ediProductObj.next('');
       }
       this.submit = false;
     }

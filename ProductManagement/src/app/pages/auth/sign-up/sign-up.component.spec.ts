@@ -103,4 +103,23 @@ describe('SignUpComponent', () => {
     req.flush(user);
 
   });
+
+  it('Email check error massage', fakeAsync(() => {
+    component.signUpForm?.setValue({
+      name: 'dfgdg',
+      first_name: 'fgfew',
+      last_name: 'fgfgdf',
+      user_name: 'fdhdfgf4',
+      email: 'cvbdfb@dfg.vo',
+      password: '45435',
+      profile_image: File
+    })
+    component.signUp();
+
+    tick();
+    authService.signUp(new FormData());
+    const req = httpController.expectOne(`${environment.baseApi}register`);
+    const msg = 'Email already exists'
+    req.flush(msg, { status: 401, statusText: 'Unauthorized' });
+  }));
 });
