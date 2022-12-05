@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+  <button mat-button class="docs-button mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base"
+    (click)="onNavigate('home')">
+    <span class="mat-mdc-button-persistent-ripple"></span>
+    <img matbuttonicon src="https://material.angular.io/assets/img/homepage/angular-white-transparent.svg" alt="angular"
+      aria-hidden="true" class="logo">
+    <span class="label"><span>Material</span></span>
+  </button>
+  <button mat-button class="example-icon favorite-icon" (click)="onNavigate('home')">
+    <mat-icon>home</mat-icon>
+    <span> Home</span>
+  </button>
+  <button mat-button class="example-icon favorite-icon" (click)="onNavigate('form')">
+    <mat-icon>receipt</mat-icon>
+    <span> Form</span>
+  </button>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon matBadge="6" matBadgeColor="warn">share</mat-icon>
+  </button>
+</mat-toolbar>
+<div class="container mt-4 mb-4">
+  <router-outlet></router-outlet>
+</div>
