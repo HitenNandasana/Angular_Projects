@@ -47,6 +47,10 @@ describe('AuthService', () => {
     expect(service.getToken()).toBe(true);
   });
 
+  it('should have not getToken method', () => {
+    expect(service.getToken()).toBe(false);
+  });
+
   it('should have setToken method', () => {
     let token = 'dfgdfhsrthsesbsd345634'
     spyOn(service, 'setToken').and.callThrough();

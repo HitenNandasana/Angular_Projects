@@ -61,14 +61,30 @@ describe('AddUpdateProductComponent', () => {
 
   it('should isNumber function to be called', () => {
     let evt = {
-      charCode: 52
+      charCode: 52,
+      which: 52,
+      keyCode: 52
     }
     expect(component).toBeTruthy();
     spyOn(component, 'isNumber').and.callThrough();
+    component.isNumber(evt);
     expect(component.isNumber(evt)).toBe(true);
+
   });
 
-  it('should have add function to ba called', async(() => {
+  it('should isNumber function to be called', () => {
+    let evt = {
+      charCode: 32,
+      which: 32,
+      keyCode: 32
+    }
+    expect(component).toBeTruthy();
+    spyOn(component, 'isNumber').and.callThrough();
+    component.isNumber(evt);
+    expect(component.isNumber(evt)).toBe(false);
+  });
+
+  it('should have add function to ba called', fakeAsync(() => {
     component.addProductForm?.setValue({
       name: 'fgsdg',
       slug: 'ddg',
@@ -87,6 +103,7 @@ describe('AddUpdateProductComponent', () => {
         image: 'gdf.png',
       }
     }
+    tick();
     productService.add(new FormData());
 
     const req = httpController.expectOne(`${environment.baseApi}products`);
@@ -95,7 +112,7 @@ describe('AddUpdateProductComponent', () => {
     req.flush(data);
   }));
 
-  it('should have edit function to ba called', async(() => {
+  it('should have edit function to ba called', fakeAsync(() => {
     component.productId = 5;
     component.addProductForm?.setValue({
       name: 'fgsdg',
@@ -104,22 +121,8 @@ describe('AddUpdateProductComponent', () => {
       price: 34324,
       image: File
     })
+    tick();
     component.add();
-
-    const data = {
-      id: '34',
-      name: 'fgg',
-      slug: 'fdgfd',
-      description: 'fdgfd',
-      price: '435',
-      image: 'fgdf.png'
-    }
-    productService.update(new FormData());
-
-    const req = httpController.expectOne(`${environment.baseApi}products/update`);
-
-    expect(req.request.method).toEqual('POST');
-    req.flush(data);
   }));
 
 });

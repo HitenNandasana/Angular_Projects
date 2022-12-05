@@ -2,6 +2,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 import { ProductService } from './product.service';
 
 describe('ProductService', () => {
@@ -57,10 +58,20 @@ describe('ProductService', () => {
   });
 
   it('should have update function', () => {
-    let data = new FormData();
-    data.append('name', 'gfgfdg');
+    const obj = {
+      id: '5',
+      name: 'fgg',
+      slug: 'fdgfd',
+      description: 'fdgfd',
+      price: '435',
+      image: 'fgdf.png'
+    }
+    service.update(new FormData());
 
-    spyOn(service, 'update').and.callThrough();
-    service.update(data);
+    const req = httpController.expectOne(`${environment.baseApi}products/update`);
+
+    expect(req.request.method).toEqual('POST');
+    req.flush(obj);
+
   });
 });

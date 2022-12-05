@@ -26,36 +26,26 @@ export class ProductService {
 
   add(data: FormData): Observable<any> {
     return this.http.post<any>(environment.baseApi + 'products', data);
-    // .subscribe(res => {
-    //   console.log(res);
-    //   let dataList = this.getProductData();
-    //   let object = res.data;
-    //   object.imgName = imagename;
-    //   dataList.push(object);
-    //   this.setProductData(dataList);
-    //   this.route.navigate(['dashboard/product']);
-    //   this.toastr.success('Product added successfully');
-    // });
   }
 
-  update(data: FormData): Observable<any> {
-    return this.http.post<any>(environment.baseApi + 'products/update', data);
-    // .subscribe(res => {
-    //   console.log(res);
-    //   let dataList = this.getProductData();
-    //   let arr = dataList.map((obj: any) => {
-    //     if (obj.id === Number(data.get('id'))) {
-    //       let object = res.data;
-    //       object.imgName = obj.imgName;
-    //       return object;
-    //     }
-    //     return obj;
-    //   })
-    //   this.setProductData(arr);
-    //   this.route.navigate(['dashboard/product']);
-    //   this.toastr.success('Product updated successfully');
-    // });
-    // this.ediProductObj.next('');
+  update(data: FormData) {
+    this.http.post<any>(environment.baseApi + 'products/update', data)
+      .subscribe(res => {
+        console.log(res);
+        let dataList = this.getProductData();
+        let arr = dataList.map((obj: any) => {
+          if (obj.id === Number(data.get('id'))) {
+            let object = res.data;
+            object.imgName = obj.imgName;
+            return object;
+          }
+          return obj;
+        })
+        this.setProductData(arr);
+        this.route.navigate(['dashboard/product']);
+        this.toastr.success('Product updated successfully');
+      });
+    this.ediProductObj.next('');
   }
 
   delete(i: any, obj: any) {

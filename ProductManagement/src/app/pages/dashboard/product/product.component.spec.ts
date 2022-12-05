@@ -33,10 +33,6 @@ describe('ProductComponent', () => {
     fixture.detectChanges();
   });
 
-  afterAll(() => {
-    localStorage.removeItem('Product');
-  })
-
   it('should create', () => {
     expect(component).toBeTruthy();
   });

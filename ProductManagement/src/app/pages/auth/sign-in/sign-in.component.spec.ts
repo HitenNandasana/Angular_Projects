@@ -1,5 +1,5 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
@@ -82,5 +82,19 @@ describe('SignInComponent', () => {
 
 
   });
+
+  it('login check error massage', fakeAsync(() => {
+    component.signInForm?.setValue({
+      email: 'fahtfghrtsyhtrtf@sfstrytr.dsv',
+      password: '3243ytry5462'
+    })
+    component.signIn();
+
+    tick();
+    authService.signIn(new FormData());
+    const req = httpController.expectOne(`${environment.baseApi}login`);
+    const msg = 'Invalid Credential'
+    req.flush(msg, { status: 401, statusText: 'Unauthorized' });
+  }));
 
 });
