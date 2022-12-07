@@ -1,0 +1,39 @@
+.hasError {
+    color: #B80000;
+}
+
+.hasError .form-control {
+    border-color: #B80000;
+}
+
+.hasSuccess {
+    color: green;
+}
+
+.hasSuccess .form-control {
+    border-color: green;
+}
+
+.form-data {
+    background-color: lightcyan;
+}
+
+.required:after {
+    color: #B80000;
+    content: ' *';
+    display: inline;
+}
+
+.layout {
+    margin-top: 150px;
+}
+
+.box {
+    max-width: 400px;
+    margin: auto;
+    box-sizing: border-box;
+    background-color: rgb(247 211 160 / 50%);
+    height: auto;
+    box-shadow: 20px 20px 50px 15px gray;
+
+}
