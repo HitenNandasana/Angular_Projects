@@ -80,9 +80,8 @@ export class AppComponent {
     })
     this.taskservice.setTaskData(arr1);
 
-    let temp = this.taskservice.getTaskData();
-    this.List1 = temp.slice(0, temp.length / 2);
-    this.List2 = temp.slice(temp.length / 2);
+    this.List1 = arr1.slice(0, arr1.length / 2);
+    this.List2 = arr1.slice(arr1.length / 2);
   }
 
   // add() {
