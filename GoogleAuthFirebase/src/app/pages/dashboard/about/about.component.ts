@@ -12,9 +12,9 @@ export class AboutComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep', 'Reading'];
+  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep', 'Reading', 'Check e-mail', 'Walk dog'];
 
-  done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog', 'Writing'];
+  // done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog', 'Writing'];
 
   drop(event: CdkDragDrop<string[]>) {
     console.log(event);

@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Hi</h1>
+<div mat-dialog-content>
+    <p>What is Your task?</p>
+    <mat-form-field appearance="outline">
+        <mat-label>Your Task</mat-label>
+        <input matInput>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data.task" cdkFocusInitial>Save</button>
+</div>

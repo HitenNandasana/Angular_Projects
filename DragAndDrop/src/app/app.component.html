@@ -1,0 +1,44 @@
+<p>
+  <mat-toolbar color="primary">
+    <img matbuttonicon src="https://material.angular.io/assets/img/homepage/angular-white-transparent.svg" alt="angular"
+      aria-hidden="true" class="logo">
+    <span>Your Task</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>share</mat-icon>
+    </button>
+  </mat-toolbar>
+</p>
+
+<h2 class="text-center text-success mt-3">Use of Drag and Drop functionality</h2>
+<br>
+<hr>
+
+<div class="container mt-4">
+  <!-- <div class=" d-flex justify-content-end">
+    <button mat-raised-button color="primary" (click)="add()">Add</button>
+  </div> -->
+  <div cdkDropListGroup>
+    <div class="example-container">
+      <h2>Completed</h2>
+
+      <div cdkDropList [cdkDropListData]="List1" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of List1" cdkDrag>
+          {{item.name}}
+        </div>
+      </div>
+    </div>
+    <div class="example-container">
+      <h2>Completed</h2>
+
+      <div cdkDropList [cdkDropListData]="List2" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of List2" cdkDrag>
+          {{item.name}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
