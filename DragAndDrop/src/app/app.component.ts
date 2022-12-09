@@ -43,7 +43,7 @@ export class AppComponent {
   }
 
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: any) {
     console.log(event);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -56,28 +56,17 @@ export class AppComponent {
       );
     }
 
-    let a1 = event.container.data;
-    let a2 = event.previousContainer.data;
-    let arr: any;
-    if (event.previousContainer.id === event.container.id) {
-      if (event.container.id === 'cdk-drop-list-0') {
-        arr = a2.concat(this.List2);
-      } else {
-        arr = this.List1.concat(a2);
-      }
-    } else {
-      if (event.container.id === 'cdk-drop-list-0') {
-        arr = a1.concat(a2);
-      } else {
-        arr = a2.concat(a1);
-      }
-    }
+    let array = event.previousContainer.connectedTo[1].data.concat(event.container.connectedTo[0].data);
 
-    let i = 0;
-    let arr1 = arr.map((obj: any) => {
-      i = i + 1;
-      return { ...obj, seqNo: i }
-    })
+    let arr1: any[] = [];
+    array.forEach((obj: any, index: any) => {
+      let a = {
+        id: obj.id,
+        name: obj.name,
+        seqNo: index + 1
+      }
+      arr1.push(a);
+    });
     this.taskservice.setTaskData(arr1);
 
     this.List1 = arr1.slice(0, arr1.length / 2);

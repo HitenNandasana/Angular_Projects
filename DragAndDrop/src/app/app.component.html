@@ -21,22 +21,22 @@
   <!-- <div class=" d-flex justify-content-end">
     <button mat-raised-button color="primary" (click)="add()">Add</button>
   </div> -->
-  <div cdkDropListGroup>
-    <h2 class="text-primary">Task List</h2>
-    <div class="example-container">
+  <h2 class="text-primary">Task List</h2>
+  <div class="example-container">
 
-      <div cdkDropList [cdkDropListData]="List1" class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of List1" cdkDrag>
-          {{item.name}}
-        </div>
+    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="List1" [cdkDropListConnectedTo]="[doneList,todoList]"
+      class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of List1" cdkDrag>
+        {{item.name}}
       </div>
     </div>
-    <div class="example-container">
+  </div>
+  <div class="example-container">
 
-      <div cdkDropList [cdkDropListData]="List2" class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of List2" cdkDrag>
-          {{item.name}}
-        </div>
+    <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="List2" [cdkDropListConnectedTo]="[doneList,todoList]"
+      class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of List2" cdkDrag>
+        {{item.name}}
       </div>
     </div>
   </div>
