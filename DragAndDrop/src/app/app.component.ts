@@ -1,5 +1,6 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskService } from './appServices/task.service';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
@@ -12,41 +13,26 @@ import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 export class AppComponent {
   title = 'DragAndDrop';
 
-  List: any = ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight']
   taskList: any = [];
-  id: number = 1;
+  id: any;
   List1: any;
   List2: any
 
   constructor(public dialog: MatDialog,
-    private taskservice: TaskService) {
+    private taskservice: TaskService,
+    private fb: FormBuilder) {
 
     if (localStorage.getItem('List') === null || localStorage.getItem('List') == undefined) {
       this.taskservice.setTaskData([]);
       return;
     }
 
-    for (let i = 0; i < this.List.length; i++) {
-      let obj = {
-        id: i + 1,
-        name: this.List[i],
-        seqNo: i + 1
-      }
-      this.taskList.push(obj)
-      this.id = this.id + 1;
-    }
-    this.taskservice.setTaskData(this.taskList)
-    this.id = 1;
     this.taskList = this.taskservice.getTaskData();
-    console.log('h');
-    console.log(this.taskList);
-    this.List1 = this.taskList.slice(0, this.taskList.length / 2);
-    this.List2 = this.taskList.slice(this.taskList.length / 2);
+    this.List1 = this.taskList.slice(0, Math.ceil(this.taskList.length / 2));
+    this.List2 = this.taskList.slice(Math.ceil(this.taskList.length / 2));
   }
 
-
   drop(event: any) {
-    console.log(event);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -65,26 +51,61 @@ export class AppComponent {
       let a = {
         id: obj.id,
         name: obj.name,
+        image: obj.image,
         seqNo: index + 1
       }
       arr1.push(a);
     });
     this.taskservice.setTaskData(arr1);
 
-    this.List1 = arr1.slice(0, arr1.length / 2);
-    this.List2 = arr1.slice(arr1.length / 2);
+    this.List1 = arr1.slice(0, Math.ceil(arr1.length / 2));
+    this.List2 = arr1.slice(Math.ceil(arr1.length / 2));
+
   }
 
   add() {
-    const dialogRef = this.dialog.open(DialogBoxComponent, {
-      data: { List: '' },
-    });
+    this.taskList = this.taskservice.getTaskData();
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.List.push(result)
-      console.log(this.List);
-      this.taskservice.setTaskData(this.List);
-      console.log(this.taskservice.getTaskData());
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      data: name,
     });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result !== undefined) {
+        if (Object.keys(this.taskList).length === 0) {
+          this.id = 1;
+        } else {
+          this.id = Math.max(...this.taskList.map((task: any) => task.id)) + 1;
+        }
+
+        let obj = {
+          id: this.id,
+          name: result.value.name,
+          image: result.value.image.name,
+          seqNo: this.taskList.length + 1
+        }
+        this.taskList.push(obj);
+        this.taskservice.setTaskData(this.taskList);
+
+        this.taskList = this.taskservice.getTaskData();
+        this.List1 = this.taskList.slice(0, Math.ceil(this.taskList.length / 2));
+        this.List2 = this.taskList.slice(Math.ceil(this.taskList.length / 2));
+      }
+
+    });
+  }
+
+  deleteTask(obj: any) {
+    if (confirm('Do You Really Want to Delete this?')) {
+      this.taskList = this.taskservice.getTaskData();
+      this.taskList.forEach((res: any, index: any) => {
+        if (obj.id === res.id) {
+          this.taskList.splice(index, 1);
+        }
+      });
+      this.taskservice.setTaskData(this.taskList);
+    }
+    this.taskList = this.taskservice.getTaskData();
+    this.List1 = this.taskList.slice(0, Math.ceil(this.taskList.length / 2));
+    this.List2 = this.taskList.slice(Math.ceil(this.taskList.length / 2));
   }
 }

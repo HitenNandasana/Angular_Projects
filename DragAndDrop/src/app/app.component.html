@@ -26,8 +26,12 @@
 
     <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="List1" [cdkDropListConnectedTo]="[doneList,todoList]"
       class="example-list" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of List1" cdkDrag>
+      <div class="example-box" *ngFor="let item of List1; let i = index" cdkDrag>
         {{item.name}}
+        <img *cdkDragPreview src="../assets/image/{{item.image}}">
+        <img src="../assets/image/{{item.image}}" class="img" alt="image" srcset="">
+        <mat-icon aria-hidden="false" aria-label="Example Delete icon" fontIcon="delete" type="button"
+          (click)="deleteTask(item)">delete</mat-icon>
       </div>
     </div>
   </div>
@@ -35,8 +39,12 @@
 
     <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="List2" [cdkDropListConnectedTo]="[doneList,todoList]"
       class="example-list" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of List2" cdkDrag>
+      <div class="example-box" *ngFor="let item of List2; let i = index" cdkDrag>
         {{item.name}}
+        <img *cdkDragPreview src="../assets/image/{{item.image}}">
+        <img src="../assets/image/{{item.image}}" class="img" alt="image" srcset="">
+        <mat-icon aria-hidden="false" aria-label="Example Delete icon" fontIcon="delete" type="button"
+          (click)="deleteTask(item)">delete</mat-icon>
       </div>
     </div>
   </div>
