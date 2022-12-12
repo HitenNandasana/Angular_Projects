@@ -25,7 +25,6 @@ export class AppComponent {
       this.taskservice.setTaskData([]);
       return;
     }
-    // this.taskList = this.taskservice.getTaskData();
 
     for (let i = 0; i < this.List.length; i++) {
       let obj = {
@@ -38,6 +37,9 @@ export class AppComponent {
     }
     this.taskservice.setTaskData(this.taskList)
     this.id = 1;
+    this.taskList = this.taskservice.getTaskData();
+    console.log('h');
+    console.log(this.taskList);
     this.List1 = this.taskList.slice(0, this.taskList.length / 2);
     this.List2 = this.taskList.slice(this.taskList.length / 2);
   }
@@ -73,16 +75,16 @@ export class AppComponent {
     this.List2 = arr1.slice(arr1.length / 2);
   }
 
-  // add() {
-  //   const dialogRef = this.dialog.open(DialogBoxComponent, {
-  //     data: { task: this.task },
-  //   });
+  add() {
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      data: { List: '' },
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log(result);
-  //     console.log('The dialog was closed');
-  //     // this.task = result;
-  //     // this.task.push(result);
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe(result => {
+      this.List.push(result)
+      console.log(this.List);
+      this.taskservice.setTaskData(this.List);
+      console.log(this.taskservice.getTaskData());
+    });
+  }
 }

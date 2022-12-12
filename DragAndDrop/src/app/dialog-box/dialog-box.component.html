@@ -3,10 +3,10 @@
     <p>What is Your task?</p>
     <mat-form-field appearance="outline">
         <mat-label>Your Task</mat-label>
-        <input matInput>
+        <input matInput [(ngModel)]="data.List">
     </mat-form-field>
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button [mat-dialog-close]="data.task" cdkFocusInitial>Save</button>
+    <button mat-button [mat-dialog-close]="data.List" cdkFocusInitial>Save</button>
 </div>
