@@ -1,6 +1,5 @@
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskService } from './appServices/task.service';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
@@ -20,16 +19,12 @@ export class AppComponent {
 
   constructor(public dialog: MatDialog,
     private taskservice: TaskService,
-    private fb: FormBuilder) {
-
+  ) {
     if (localStorage.getItem('List') === null || localStorage.getItem('List') == undefined) {
       this.taskservice.setTaskData([]);
       return;
     }
-
-    this.taskList = this.taskservice.getTaskData();
-    this.List1 = this.taskList.slice(0, Math.ceil(this.taskList.length / 2));
-    this.List2 = this.taskList.slice(Math.ceil(this.taskList.length / 2));
+    this.setList();
   }
 
   drop(event: any) {
@@ -43,31 +38,14 @@ export class AppComponent {
         event.currentIndex,
       );
     }
-
     let array = event.previousContainer.connectedTo[1].data.concat(event.container.connectedTo[0].data);
-
-    let arr1: any[] = [];
-    array.forEach((obj: any, index: any) => {
-      let a = {
-        id: obj.id,
-        name: obj.name,
-        image: obj.image,
-        seqNo: index + 1
-      }
-      arr1.push(a);
-    });
-    this.taskservice.setTaskData(arr1);
-
-    this.List1 = arr1.slice(0, Math.ceil(arr1.length / 2));
-    this.List2 = arr1.slice(Math.ceil(arr1.length / 2));
-
+    this.arrangeData(array);
   }
 
   add() {
     this.taskList = this.taskservice.getTaskData();
-
     const dialogRef = this.dialog.open(DialogBoxComponent, {
-      data: name,
+      // data: name,
     });
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result !== undefined) {
@@ -76,7 +54,6 @@ export class AppComponent {
         } else {
           this.id = Math.max(...this.taskList.map((task: any) => task.id)) + 1;
         }
-
         let obj = {
           id: this.id,
           name: result.value.name,
@@ -85,12 +62,8 @@ export class AppComponent {
         }
         this.taskList.push(obj);
         this.taskservice.setTaskData(this.taskList);
-
-        this.taskList = this.taskservice.getTaskData();
-        this.List1 = this.taskList.slice(0, Math.ceil(this.taskList.length / 2));
-        this.List2 = this.taskList.slice(Math.ceil(this.taskList.length / 2));
+        this.setList();
       }
-
     });
   }
 
@@ -104,6 +77,19 @@ export class AppComponent {
       });
       this.taskservice.setTaskData(this.taskList);
     }
+    let data = this.taskservice.getTaskData();
+    this.arrangeData(data);
+  }
+
+  arrangeData(arrayData: any) {
+    let arr1 = arrayData.map((obj: any, index: any) => {
+      return { ...obj, seqNo: index + 1 }
+    });
+    this.taskservice.setTaskData(arr1);
+    this.setList();
+  }
+
+  setList() {
     this.taskList = this.taskservice.getTaskData();
     this.List1 = this.taskList.slice(0, Math.ceil(this.taskList.length / 2));
     this.List2 = this.taskList.slice(Math.ceil(this.taskList.length / 2));
