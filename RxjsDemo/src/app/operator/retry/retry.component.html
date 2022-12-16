@@ -1,0 +1,21 @@
+<div class="row mt-3">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
+        <strong>Error!</strong> {{error}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                RxJS retry
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Data</h5>
+                <div class="card-text">
+                    <ul *ngFor="let item of data">
+                        <li>{{item.title}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="row mt-3">
+    <div class="col-md-6">
+        <select class="form-select" #first>
+            <option *ngFor="let item of name" value="{{item}}">{{item}}</option>
+        </select>
+    </div>
+    <div class="col-md-6">
+        <select class="form-select" #second>
+            <option *ngFor="let item of color" value="{{item}}">{{item}}</option>
+        </select>
+    </div>
+</div>
+<div class="mt-4" id="combine"></div>

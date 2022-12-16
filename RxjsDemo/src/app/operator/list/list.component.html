@@ -1,0 +1,6 @@
+<span *ngFor="let item of list">
+    <button type="button" class="btn btn-outline-success mt-4 me-4" style="width: 200px;height: 70px;">
+        <a class="nav-link" routerLinkActive="router-link-active" (click)="redirect(item.path)"
+            aria-current="page"><strong>{{item.name}}</strong></a>
+    </button>
+</span>
