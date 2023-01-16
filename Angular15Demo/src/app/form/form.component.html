@@ -24,9 +24,9 @@
 
         <div class="mb-3 col-6 form-group"
             [ngClass]="{'hasError': password.invalid && (password.touched || password.dirty || myForm.submitted) ,'hasSuccess': password.valid && (password.touched || password.dirty) }">
-            <label for="password" class="form-label required">Password</label>
+            <label for="password" class="form-label required" color="green">Password</label>
             <input type="password" class="form-control" name="password" id="password" ngModel #password="ngModel"
-                required appPasswordValidate>
+                required appColor color="green">
             <ng-container *ngIf="myForm.invalid && myForm.submitted || myForm.invalid && password.touched">
                 <small class="text-danger" *ngIf="password.errors?.['required']">Password is Required</small>
                 <small class="text-danger"

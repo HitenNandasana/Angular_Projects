@@ -2,13 +2,19 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, NgForm } from '@angular/forms';
+import { ColorDirective } from '../color.directive';
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [CommonModule, HttpClientModule,FormsModule],
+  imports: [CommonModule, HttpClientModule, FormsModule, ColorDirective],
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
+  hostDirectives: [
+    {
+      directive: ColorDirective,
+    }
+  ]
 })
 export class FormComponent {
   myForm: any;
@@ -20,8 +26,8 @@ export class FormComponent {
   ngOnInit(): void {
   }
   onSubmit(form: NgForm) {
-    console.log(form);
-    if (form.valid === true) {
+    if (form.valid) {
+      console.log(form);
       this.submitted = true;
     }
   }

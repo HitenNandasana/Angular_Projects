@@ -3,20 +3,26 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { NgOptimizedImage, provideImageKitLoader } from '@angular/common';
+import { CdkListboxModule } from '@angular/cdk/listbox';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ColorDirective } from './color.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     AboutComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgOptimizedImage
+    CdkListboxModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    NgOptimizedImage,
+    ColorDirective
   ],
   providers: [
     provideImageKitLoader("https://ik.imagekit.io/arungudelli/")
