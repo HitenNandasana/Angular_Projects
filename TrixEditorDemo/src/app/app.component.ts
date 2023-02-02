@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'TrixEditorDemo';
   public text: any;
 
-  list = ['hiten', 'sagar', 'jay', 'ravi', 'abc', 'xyz']
+  list = ['hiten N', 'sagar', 'jay', 'ravi', 'abc', 'xyz']
   // editor!: Editor;
   htmlText = '';
 
