@@ -1,0 +1,311 @@
+<!-- <h1 style="color: hotpink;">Hiten</h1>
+
+<trix-editor placeholder="Description" class="editor-content">
+</trix-editor>
+
+
+<trix-editor angular-trix ng-model="foo"></trix-editor>
+
+
+<ngx-editor></ngx-editor>
+
+
+<input [(colorPicker)]="color" [style.background]="color" /> -->
+
+
+<br>
+
+<!-- <trix-editor> -->
+<!-- <trix-toolbar id="trix-toolbar-1">
+  <div class="button_groups">
+    <span class="button_group text_tools">
+      <button type="button" class="bold" data-attribute="bold" data-key="b" title="Bold">Bold</button>
+      <button type="button" class="italic" data-attribute="italic" data-key="i" title="Italic">Italic</button>
+      <button type="button" class="strike" data-attribute="strike" title="Strikethrough">Strikethrough</button>
+      <button type="button" class="link" data-attribute="href" data-action="link" data-key="k"
+        title="Link">Link</button>
+      <button type="button" title="Color Picker" data-attribute="color-picker" data-action="color-picker" class="link">
+        Color</button>
+    </span>
+
+    <span class="button_group block_tools">
+      <button type="button" class="quote" data-attribute="quote" title="Quote">Quote</button>
+      <button type="button" class="code" data-attribute="code" title="Code">Code</button>
+      <button type="button" class="list bullets" data-attribute="bullet" title="Bullets">Bullets</button>
+      <button type="button" class="list numbers" data-attribute="number" title="Numbers">Numbers</button>
+      <button type="button" class="block-level decrease" data-action="decreaseBlockLevel"
+        title="Decrease Level">Decrease Level</button>
+      <button type="button" class="block-level increase" data-action="increaseBlockLevel"
+        title="Increase Level">Increase Level</button>
+    </span>
+
+    <span class="button_group history_tools">
+      <button type="button" class="undo" data-action="undo" data-key="z" title="Undo">Undo</button>
+      <button type="button" class="redo" data-action="redo" data-key="shift+z" title="Redo">Redo</button>
+    </span>
+  </div>
+
+  <div class="dialogs">
+    <div class="dialog link_dialog" data-attribute="href" data-dialog="href">
+      <div class="link_url_fields">
+        <input type="url" required="" name="href" placeholder="Enter a URL…">
+        <div class="button_group">
+          <input type="button" value="Link" data-method="setAttribute">
+          <input type="button" value="Unlink" data-method="removeAttribute">
+        </div>
+      </div>
+    </div>
+    <div class="dialog color-picker-dialog" data-attribute="color-picker" data-dialog="color-picker">
+      <div class="link_url_fields">
+        <input type="url" required="" name="href" placeholder="Enter a URL…">
+        <div class="button_group">
+          <input type="button" value="Link" data-method="setAttribute">
+          <input type="button" value="Unlink" data-method="removeAttribute">
+        </div>
+      </div>
+    </div>
+  </div>
+</trix-toolbar> -->
+
+<trix-toolbar id="trix-toolbar-1">
+  <button type="button" class="trix-button trix-button--icon trix-button--color-picker" title="Color Picker"
+    style="height: 20px;width: 20px;" data-action="color-picker">
+    <span class="trix-button__icon">
+      <i class="fas fa-palette"></i>
+    </span>
+  </button>
+</trix-toolbar>
+
+<!-- Add the color picker dialog to the Trix editor -->
+<div class="color-picker-dialog">
+  <color-picker [(color)]="selectedColor"></color-picker>
+</div>
+<!-- </trix-editor> -->
+
+
+<trix-toolbar id="trix-toolbar-1">
+  <div class="trix-button-row">
+    <span class="trix-button-group trix-button-group--text-tools" data-trix-button-group="text-tools">
+      <button type="button" class="trix-button trix-button--icon trix-button--icon-bold" data-trix-attribute="bold"
+        data-trix-key="b" title="Bold" tabindex="-1">Bold</button>
+      <button type="button" class="trix-button trix-button--icon trix-button--icon-italic" data-trix-attribute="italic"
+        data-trix-key="i" title="Italic" tabindex="-1">Italic</button>
+      <button type="button" class="trix-button trix-button--icon trix-button--icon-strike" data-trix-attribute="strike"
+        title="Strikethrough" tabindex="-1">Strikethrough</button>
+      <button type="button" class="trix-button trix-button--icon trix-button--icon-link" data-trix-attribute="href"
+        data-trix-action="link" data-trix-key="k" title="Link" tabindex="-1">Link</button>
+      <button type="button" class="trix-button trix-button--icon trix-button--icon-color" data-trix-action="x-color"
+        title="Color" tabindex="-1">Color</button></span>
+
+    <span class="trix-button-group trix-button-group--block-tools" data-trix-button-group="block-tools">
+      <button type="button" class="trix-button trix-button--icon trix-button--icon-heading-1"
+        data-trix-attribute="heading1" title="Heading" tabindex="-1">Heading</button>
+      <button type="button" class="trix-button trix-button--icon trix-button--icon-quote" data-trix-attribute="quote"
+        title="Quote" tabindex="-1">Quote</button><button type="button"
+        class="trix-button trix-button--icon trix-button--icon-horizontal-rule" data-trix-action="x-horizontal-rule"
+        tabindex="-1" title="Divider">Divider</button>
+      <button type="button" class="trix-button trix-button--icon trix-button--icon-code" data-trix-attribute="code"
+        title="Code" tabindex="-1">Code</button>
+      <button type="button" class="trix-button trix-button--icon trix-button--icon-bullet-list"
+        data-trix-attribute="bullet" title="Bullets" tabindex="-1">Bullets</button>
+      <button type="button" class="trix-button trix-button--icon trix-button--icon-number-list"
+        data-trix-attribute="number" title="Numbers" tabindex="-1">Numbers</button>
+      <button type="button" class="trix-button trix-button--icon trix-button--icon-decrease-nesting-level"
+        data-trix-action="decreaseNestingLevel" title="Decrease Level" tabindex="-1" disabled="">Decrease Level</button>
+      <button type="button" class="trix-button trix-button--icon trix-button--icon-increase-nesting-level"
+        data-trix-action="increaseNestingLevel" title="Increase Level" tabindex="-1" disabled="">Increase Level</button>
+    </span>
+
+    <span class="trix-button-group trix-button-group--file-tools" data-trix-button-group="file-tools">
+      <button type="button" class="trix-button trix-button--icon trix-button--icon-attach"
+        data-trix-action="attachFiles" title="Attach Files" tabindex="-1">Attach Files</button>
+    </span>
+
+    <span class="trix-button-group-spacer"></span>
+
+    <span class="trix-button-group trix-button-group--history-tools" data-trix-button-group="history-tools">
+      <button type="button" class="trix-button trix-button--icon trix-button--icon-undo" data-trix-action="undo"
+        data-trix-key="z" title="Undo" tabindex="-1" disabled="">Undo</button>
+      <button type="button" class="trix-button trix-button--icon trix-button--icon-redo" data-trix-action="redo"
+        data-trix-key="shift+z" title="Redo" tabindex="-1" disabled="">Redo</button>
+    </span>
+  </div>
+
+  <div class="trix-dialogs" data-trix-dialogs="">
+    <div class="trix-dialog trix-dialog--link" data-trix-dialog="href" data-trix-dialog-attribute="href">
+      <div class="trix-dialog__link-fields">
+        <input type="url" name="href" class="trix-input trix-input--dialog" placeholder="Enter a URL…" aria-label="URL"
+          required="" data-trix-input="" disabled="disabled">
+        <div class="trix-button-group">
+          <input type="button" class="trix-button trix-button--dialog" value="Link" data-trix-method="setAttribute">
+          <input type="button" class="trix-button trix-button--dialog" value="Unlink"
+            data-trix-method="removeAttribute">
+        </div>
+      </div>
+      <div data-behavior="embed_container">
+      </div>
+    </div>
+    <div class="trix-dialog trix-dialog--color centered" data-trix-dialog="x-color">
+      <div>
+        <bc-color-picker class="color-picker color-picker--for-text color-picker--for-text-foreground"
+          name="foregroundColor" color="#887626 #B95E06 #CF0000 #D81CAA #9013FE #0562B9 #118A0F #945216 #666666">
+          <label class="color-picker__field" data-role="color_picker_field">
+            <input class="color-picker__input" data-role="color_picker_input" type="radio" name="foregroundColor"
+              value="#887626">
+            <span class="color-picker__swatch" data-role="color_picker_swatch"
+              style="background-color: #887626; color: #887626"></span>
+          </label>
+
+
+          <label class="color-picker__field" data-role="color_picker_field">
+            <input class="color-picker__input" data-role="color_picker_input" type="radio" name="foregroundColor"
+              value="#B95E06">
+            <span class="color-picker__swatch" data-role="color_picker_swatch"
+              style="background-color: #B95E06; color: #B95E06"></span>
+          </label>
+
+
+          <label class="color-picker__field" data-role="color_picker_field">
+            <input class="color-picker__input" data-role="color_picker_input" type="radio" name="foregroundColor"
+              value="#CF0000">
+            <span class="color-picker__swatch" data-role="color_picker_swatch"
+              style="background-color: #CF0000; color: #CF0000"></span>
+          </label>
+
+
+          <label class="color-picker__field" data-role="color_picker_field">
+            <input class="color-picker__input" data-role="color_picker_input" type="radio" name="foregroundColor"
+              value="#D81CAA">
+            <span class="color-picker__swatch" data-role="color_picker_swatch"
+              style="background-color: #D81CAA; color: #D81CAA"></span>
+          </label>
+
+
+          <label class="color-picker__field" data-role="color_picker_field">
+            <input class="color-picker__input" data-role="color_picker_input" type="radio" name="foregroundColor"
+              value="#9013FE">
+            <span class="color-picker__swatch" data-role="color_picker_swatch"
+              style="background-color: #9013FE; color: #9013FE"></span>
+          </label>
+
+
+          <label class="color-picker__field" data-role="color_picker_field">
+            <input class="color-picker__input" data-role="color_picker_input" type="radio" name="foregroundColor"
+              value="#0562B9">
+            <span class="color-picker__swatch" data-role="color_picker_swatch"
+              style="background-color: #0562B9; color: #0562B9"></span>
+          </label>
+
+
+          <label class="color-picker__field" data-role="color_picker_field">
+            <input class="color-picker__input" data-role="color_picker_input" type="radio" name="foregroundColor"
+              value="#118A0F">
+            <span class="color-picker__swatch" data-role="color_picker_swatch"
+              style="background-color: #118A0F; color: #118A0F"></span>
+          </label>
+
+
+          <label class="color-picker__field" data-role="color_picker_field">
+            <input class="color-picker__input" data-role="color_picker_input" type="radio" name="foregroundColor"
+              value="#945216">
+            <span class="color-picker__swatch" data-role="color_picker_swatch"
+              style="background-color: #945216; color: #945216"></span>
+          </label>
+
+
+          <label class="color-picker__field" data-role="color_picker_field">
+            <input class="color-picker__input" data-role="color_picker_input" type="radio" name="foregroundColor"
+              value="#666666">
+            <span class="color-picker__swatch" data-role="color_picker_swatch"
+              style="background-color: #666666; color: #666666"></span>
+          </label>
+
+
+        </bc-color-picker>
+      </div>
+
+      <div class="push_quarter--top">
+        <bc-color-picker class="color-picker color-picker--for-text color-picker--for-text-background"
+          name="backgroundColor" color="#FAF785 #FFF0DB #FFE5E5 #FFE4F7 #F2EDFF #E1EFFC #E4F8E2 #EEE2D7 #F2F2F2">
+          <label class="color-picker__field" data-role="color_picker_field">
+            <input class="color-picker__input" data-role="color_picker_input" type="radio" name="backgroundColor"
+              value="#FAF785">
+            <span class="color-picker__swatch" data-role="color_picker_swatch"
+              style="background-color: #FAF785; color: #FAF785"></span>
+          </label>
+
+
+          <label class="color-picker__field" data-role="color_picker_field">
+            <input class="color-picker__input" data-role="color_picker_input" type="radio" name="backgroundColor"
+              value="#FFF0DB">
+            <span class="color-picker__swatch" data-role="color_picker_swatch"
+              style="background-color: #FFF0DB; color: #FFF0DB"></span>
+          </label>
+
+
+          <label class="color-picker__field" data-role="color_picker_field">
+            <input class="color-picker__input" data-role="color_picker_input" type="radio" name="backgroundColor"
+              value="#FFE5E5">
+            <span class="color-picker__swatch" data-role="color_picker_swatch"
+              style="background-color: #FFE5E5; color: #FFE5E5"></span>
+          </label>
+
+
+          <label class="color-picker__field" data-role="color_picker_field">
+            <input class="color-picker__input" data-role="color_picker_input" type="radio" name="backgroundColor"
+              value="#FFE4F7">
+            <span class="color-picker__swatch" data-role="color_picker_swatch"
+              style="background-color: #FFE4F7; color: #FFE4F7"></span>
+          </label>
+
+
+          <label class="color-picker__field" data-role="color_picker_field">
+            <input class="color-picker__input" data-role="color_picker_input" type="radio" name="backgroundColor"
+              value="#F2EDFF">
+            <span class="color-picker__swatch" data-role="color_picker_swatch"
+              style="background-color: #F2EDFF; color: #F2EDFF"></span>
+          </label>
+
+
+          <label class="color-picker__field" data-role="color_picker_field">
+            <input class="color-picker__input" data-role="color_picker_input" type="radio" name="backgroundColor"
+              value="#E1EFFC">
+            <span class="color-picker__swatch" data-role="color_picker_swatch"
+              style="background-color: #E1EFFC; color: #E1EFFC"></span>
+          </label>
+
+
+          <label class="color-picker__field" data-role="color_picker_field">
+            <input class="color-picker__input" data-role="color_picker_input" type="radio" name="backgroundColor"
+              value="#E4F8E2">
+            <span class="color-picker__swatch" data-role="color_picker_swatch"
+              style="background-color: #E4F8E2; color: #E4F8E2"></span>
+          </label>
+
+
+          <label class="color-picker__field" data-role="color_picker_field">
+            <input class="color-picker__input" data-role="color_picker_input" type="radio" name="backgroundColor"
+              value="#EEE2D7">
+            <span class="color-picker__swatch" data-role="color_picker_swatch"
+              style="background-color: #EEE2D7; color: #EEE2D7"></span>
+          </label>
+
+
+          <label class="color-picker__field" data-role="color_picker_field">
+            <input class="color-picker__input" data-role="color_picker_input" type="radio" name="backgroundColor"
+              value="#F2F2F2">
+            <span class="color-picker__swatch" data-role="color_picker_swatch"
+              style="background-color: #F2F2F2; color: #F2F2F2"></span>
+          </label>
+
+
+        </bc-color-picker>
+      </div>
+
+      <div class="push_quarter--top color_dialog__hide-unless-selection-contains-coloring">
+        <button type="button" class="btn btn--small btn--full-width" data-behavior="remove_coloring">Remove all
+          coloring</button>
+      </div>
+    </div>
+  </div>
+</trix-toolbar>
