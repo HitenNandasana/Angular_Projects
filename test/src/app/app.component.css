@@ -10,6 +10,12 @@
     display: block;
 }
 
-::ng-deep trix-toolbar {
-    /* display: none !important; */
+/* ::ng-deep trix-toolbar {
+    display: none !important;
+} */
+
+trix-toolbar button.underline {
+    font-size: 18px;
+    vertical-align: bottom;
+    text-decoration: underline;
 }
