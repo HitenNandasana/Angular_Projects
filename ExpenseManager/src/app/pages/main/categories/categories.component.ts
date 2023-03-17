@@ -6,6 +6,9 @@ import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common'
 import { CategoryData } from 'src/app/models/data';
 import { CategoryService } from 'src/app/appServices/category/category.service';
+import { ngxCsv } from 'ngx-csv/ngx-csv';
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-categories',
@@ -27,6 +30,49 @@ export class CategoriesComponent {
     private categoryservice: CategoryService
   ) {
     this.getList();
+  }
+
+  exportCsv() {
+    let options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true,
+      showTitle: true,
+      title: 'Your Data',
+      useBom: true,
+      headers: ['category', 'amount', 'type', 'date', 'actions']
+    };
+    new ngxCsv(this.categoryList, 'My data', options);
+  }
+
+  exportPdf() {
+    let header = [['category', 'amount', 'type', 'date']]
+
+    const arr = this.categoryList.reduce((map, current) => {
+      map.set(current.id, [current.category, current.amount, current.type, current.date]);
+      return map;
+    }, new Map());
+    const result = [...arr.values()];
+
+    let pdf = new jsPDF('p', 'mm', 'a4');
+    // pdf.setFontSize(2P);
+    pdf.text('Angular PDF Table', 11, 8);
+    pdf.setFontSize(12);
+    pdf.setTextColor(99);
+
+
+    (pdf as any).autoTable({
+      head: header,
+      body: result,
+      theme: 'striped',
+    })
+
+    // Open PDF document in browser's new tab
+    pdf.output('dataurlnewwindow')
+
+    // Download PDF doc  
+    pdf.save('table.pdf');
   }
 
   applyFilter(event: Event) {

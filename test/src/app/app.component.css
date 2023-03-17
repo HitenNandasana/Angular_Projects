@@ -1,0 +1,21 @@
+.color-picker-dialog {
+    display: none;
+    position: absolute;
+    z-index: 999;
+    top: 50px;
+    left: 50px;
+}
+
+.color-picker-dialog.visible {
+    display: block;
+}
+
+/* ::ng-deep trix-toolbar {
+    display: none !important;
+} */
+
+trix-toolbar button.underline {
+    font-size: 18px;
+    vertical-align: bottom;
+    text-decoration: underline;
+}

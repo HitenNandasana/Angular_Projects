@@ -1,0 +1,51 @@
+<p>
+  <mat-toolbar color="primary">
+    <img matbuttonicon src="https://material.angular.io/assets/img/homepage/angular-white-transparent.svg" alt="angular"
+      aria-hidden="true" class="logo">
+    <span>Your Task</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>share</mat-icon>
+    </button>
+  </mat-toolbar>
+</p>
+
+<h2 class="text-center text-success mt-3">Use of Drag and Drop functionality</h2>
+<br>
+<hr>
+
+<div class="container mt-4">
+  <div class=" d-flex justify-content-end">
+    <button mat-raised-button color="primary" (click)="add()">Add</button>
+  </div>
+  <h2 class="text-primary">Task List</h2>
+  <div class="example-container">
+
+    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="List1" [cdkDropListConnectedTo]="[doneList,todoList]"
+      class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of List1; let i = index" cdkDrag>
+        {{item.name}}
+        <img *cdkDragPreview src="../assets/image/{{item.image}}">
+        <img src="../assets/image/{{item.image}}" class="img" alt="image" srcset="">
+        <mat-icon aria-hidden="false" aria-label="Example Delete icon" fontIcon="delete" type="button"
+          (click)="deleteTask(item)">delete</mat-icon>
+      </div>
+    </div>
+  </div>
+  <div class="example-container">
+
+    <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="List2" [cdkDropListConnectedTo]="[doneList,todoList]"
+      class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of List2; let i = index" cdkDrag>
+        {{item.name}}
+        <img *cdkDragPreview src="../assets/image/{{item.image}}">
+        <img src="../assets/image/{{item.image}}" class="img" alt="image" srcset="">
+        <mat-icon aria-hidden="false" aria-label="Example Delete icon" fontIcon="delete" type="button"
+          (click)="deleteTask(item)">delete</mat-icon>
+      </div>
+    </div>
+  </div>
+</div>

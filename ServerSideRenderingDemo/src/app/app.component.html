@@ -1,0 +1,9 @@
+<h1 style="text-align: center;">Hiten Welcome</h1>
+<h2>SSR Demo</h2>
+<ul *ngFor="let item of photos">
+  <li style="list-style-type: none;">{{item.id}} - {{item.title}}</li>
+  <img [src]="item.url" style="height: 100px;width: 100px;" alt="" srcset="">
+</ul>
+<!-- <ul *ngFor="let item of posts">
+  <li style="list-style-type: none;">{{item.id}} - {{item.title}}</li>
+</ul> -->

@@ -1,0 +1,104 @@
+<!-- <h1 style="color: hotpink;">Hiten</h1>
+
+<trix-editor placeholder="Description" class="editor-content">
+</trix-editor>
+
+
+<trix-editor angular-trix ng-model="foo"></trix-editor>
+
+
+<ngx-editor></ngx-editor>
+
+
+<input [(colorPicker)]="color" [style.background]="color" /> -->
+<!-- <input [(colorPicker)]="color" [style.background]="color" ngModel="color" style="width: 50px;" readonly /> -->
+
+
+<br>
+
+<!-- <trix-editor> -->
+<!-- <trix-toolbar id="trix-toolbar-1">
+  <div class="button_groups">
+    <span class="button_group text_tools">
+      <button type="button" class="bold" data-attribute="bold" data-key="b" title="Bold">Bold</button>
+      <button type="button" class="italic" data-attribute="italic" data-key="i" title="Italic">Italic</button>
+      <button type="button" class="strike" data-attribute="strike" title="Strikethrough">Strikethrough</button>
+      <button type="button" class="link" data-attribute="href" data-action="link" data-key="k"
+        title="Link">Link</button>
+      <button type="button" title="Color Picker" data-attribute="color-picker" data-action="color-picker" class="link">
+        Color</button>
+    </span>
+
+    <span class="button_group block_tools">
+      <button type="button" class="quote" data-attribute="quote" title="Quote">Quote</button>
+      <button type="button" class="code" data-attribute="code" title="Code">Code</button>
+      <button type="button" class="list bullets" data-attribute="bullet" title="Bullets">Bullets</button>
+      <button type="button" class="list numbers" data-attribute="number" title="Numbers">Numbers</button>
+      <button type="button" class="block-level decrease" data-action="decreaseBlockLevel"
+        title="Decrease Level">Decrease Level</button>
+      <button type="button" class="block-level increase" data-action="increaseBlockLevel"
+        title="Increase Level">Increase Level</button>
+    </span>
+
+    <span class="button_group history_tools">
+      <button type="button" class="undo" data-action="undo" data-key="z" title="Undo">Undo</button>
+      <button type="button" class="redo" data-action="redo" data-key="shift+z" title="Redo">Redo</button>
+    </span>
+  </div>
+
+  <div class="dialogs">
+    <div class="dialog link_dialog" data-attribute="href" data-dialog="href">
+      <div class="link_url_fields">
+        <input type="url" required="" name="href" placeholder="Enter a URL…">
+        <div class="button_group">
+          <input type="button" value="Link" data-method="setAttribute">
+          <input type="button" value="Unlink" data-method="removeAttribute">
+        </div>
+      </div>
+    </div>
+    <div class="dialog color-picker-dialog" data-attribute="color-picker" data-dialog="color-picker">
+      <div class="link_url_fields">
+        <input type="url" required="" name="href" placeholder="Enter a URL…">
+        <div class="button_group">
+          <input type="button" value="Link" data-method="setAttribute">
+          <input type="button" value="Unlink" data-method="removeAttribute">
+        </div>
+      </div>
+    </div>
+  </div>
+</trix-toolbar> -->
+
+<!-- <trix-toolbar id="trix-toolbar-1">
+  <button type="button" class="trix-button trix-button--icon trix-button--color-picker" title="Color Picker"
+    style="height: 20px;width: 20px;" data-action="color-picker">
+    <span class="trix-button__icon">
+      <i class="fas fa-palette"></i>
+    </span>
+  </button>
+</trix-toolbar> -->
+
+<!-- Add the color picker dialog to the Trix editor -->
+<div class="color-picker-dialog">
+  <color-picker [(color)]="selectedColor"></color-picker>
+</div>
+<!-- </trix-editor> -->
+
+<!-- <trix-editor style="color: {{color}}" [options]="{
+  toolbarContent: {
+    myButton: {
+      icon: 'fa fa-tag',
+      title: 'Insert My Tag',
+      action: { type: 'insertHTML', value: '<my-tag>' }
+    }
+  }
+}"></trix-editor> -->
+
+<br><br><br>
+<!-- <ejs-richtexteditor [toolbarSettings]="tools">
+
+</ejs-richtexteditor> -->
+
+
+<input id="x" value="<div>Editor <span style='text-decoration: underline;'>content</span> goes here</div>" type="hidden"
+  name="content">
+<trix-editor input="x" (trix-change)="trixChange($event, editor);"></trix-editor>

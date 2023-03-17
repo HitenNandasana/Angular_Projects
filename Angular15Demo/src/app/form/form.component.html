@@ -1,0 +1,57 @@
+<form class="mt-3" (ngSubmit)="onSubmit(myForm)" #myForm="ngForm">
+    <div class="row d-flex flex-column ">
+        <div class="mb-3 col-6 form-group"
+            [ngClass]="{'hasError': name.invalid && (name.touched || name.dirty || myForm.submitted) ,'hasSuccess': name.valid && (name.touched || name.dirty) }">
+            <label for="name" class="form-label required">Username</label>
+            <input type="text" class="form-control" name="name" id="username" minlength="3" ngModel #name="ngModel"
+                required>
+            <ng-container *ngIf="myForm.invalid && myForm.submitted || myForm.invalid && name.touched">
+                <small class="text-danger" *ngIf="name.errors?.['required']">Username is Required</small>
+                <small class="text-danger" *ngIf="name.errors?.['minlength']">Username should be atleast 3
+                    charactors.</small>
+            </ng-container>
+        </div>
+
+        <div class="mb-3 col-6 form-group"
+            [ngClass]="{'hasError': email.invalid && (email.touched || email.dirty || myForm.submitted) ,'hasSuccess': email.valid && (email.touched || email.dirty) }">
+            <label for="email" class="form-label required">email</label>
+            <input type="email" class="form-control" name="email" id="email" ngModel #email="ngModel" required email>
+            <ng-container *ngIf="myForm.invalid && myForm.submitted || myForm.invalid && email.touched">
+                <small class="text-danger" *ngIf="email.errors?.['required']">Email is Required</small>
+                <!-- <small class="text-danger" *ngIf="email.errors?.['pattern']">Email is Invalid</small> -->
+            </ng-container>
+        </div>
+
+        <div class="mb-3 col-6 form-group"
+            [ngClass]="{'hasError': password.invalid && (password.touched || password.dirty || myForm.submitted) ,'hasSuccess': password.valid && (password.touched || password.dirty) }">
+            <label for="password" class="form-label required" color="green">Password</label>
+            <input type="password" class="form-control" name="password" id="password" ngModel #password="ngModel"
+                required appColor color="green">
+            <ng-container *ngIf="myForm.invalid && myForm.submitted || myForm.invalid && password.touched">
+                <small class="text-danger" *ngIf="password.errors?.['required']">Password is Required</small>
+                <small class="text-danger"
+                    *ngIf="password.errors?.['passwordValidate'] && (password.touched || password.dirty)">Password do
+                    not match.</small>
+            </ng-container>
+        </div>
+
+        <div class="mb-3 col-6 form-group">
+            <button type="submit" class="btn btn-warning">Submit</button>
+            <button type="reset" class="btn btn-danger ms-2" (click)="onReset(myForm)">Reset</button>
+        </div>
+    </div>
+</form>
+<br>
+
+<div class="form-data col-md-6 p-2" *ngIf="submitted">
+    <h4 class="text-secondary">Your Submitted Data :</h4>
+    <div class="row">
+        <div class="col-md-6">Name :- <b>{{myForm.value.name}}</b></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">Email :- <b>{{myForm.value.email}}</b></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">Password :- <b>{{myForm.value.password}}</b></div>
+    </div>
+</div>

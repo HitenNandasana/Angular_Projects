@@ -1,0 +1,15 @@
+<form action="">
+  <h1 style="text-align: center; color: cornflowerblue;">Trix Editor</h1>
+  <trix-editor angular-trix [(ngModel)]="htmlText" ngDefaultControl id="trix_input" [mention]="list"
+    [ngModelOptions]="{standalone: true}" (itemSelected)="itemSelected($event)"></trix-editor>
+  <input type="hidden" name="" id="trix_input" autocomplete="off" [value]="htmlText">
+  <p>
+    {{htmlText}}
+  </p>
+</form>
+<!-- <div class="NgxEditor__Wrapper">
+  <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+  <ngx-editor [editor]="editor" [ngModel]="html" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+</div> -->
+<br><br>
+<!-- <angular-editor [placeholder]="'Enter text here...'"></angular-editor> -->

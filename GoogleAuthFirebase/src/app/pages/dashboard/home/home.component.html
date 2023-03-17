@@ -1,0 +1,8 @@
+<div class="example-box" cdkDrag>
+    Drag me around
+</div>
+<br>
+<hr><br>
+<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div class="example-box1" *ngFor="let n of number" cdkDrag>{{n}}</div>
+</div>

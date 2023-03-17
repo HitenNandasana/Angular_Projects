@@ -1,0 +1,31 @@
+<h3>List Box</h3>
+<div class="example-listbox-container">
+    <label class="example-listbox-label" id="example-language-label">
+        Choose Language
+    </label>
+    <ul cdkListbox [formControl]="languageCtrl" aria-labelledby="example-language-label" class="example-listbox">
+        <li *ngFor="let language of languages" [cdkOption]="language" class="example-option">
+            {{language}}
+        </li>
+    </ul>
+</div>
+<br>
+<p>
+    Your Choose language: <b>{{languageCtrl.value | json}}</b>&nbsp;
+    <button (click)="languageCtrl.reset()">Reset</button>
+</p>
+
+<ng-container *ngFor="let img of imageUrls">
+    <ng-container *ngIf="img.id == 'class-1'">
+        <img [ngSrc]="img.url" width="400" height="300" [ngClass]="img.id"
+            ngSrcset="200w, 400w, 600w, 800w, 1000w, 1200w, 1600w, 2000w, 3000w" priority />
+
+    </ng-container>
+    <ng-container *ngIf="img.id != 'class-1'">
+        <img [ngSrc]="img.url" width="400" height="300" [ngClass]="img.id"
+            ngSrcset="200w, 400w, 600w, 800w, 1000w, 1200w, 1600w, 2000w, 3000w" />
+    </ng-container>
+
+
+    <p>{{ randomContent }}</p>
+</ng-container>

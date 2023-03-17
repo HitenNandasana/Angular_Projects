@@ -1,0 +1,13 @@
+.hasError {
+    color: #B80000;
+}
+
+.hasError .form-control {
+    border-color: #B80000;
+}
+
+.required:after {
+    color: #B80000;
+    content: ' *';
+    display: inline;
+}
