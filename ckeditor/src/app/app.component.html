@@ -1,0 +1,12 @@
+<!-- <ckeditor [editor]="editor" [data]="data" id="editor"></ckeditor> -->
+<ckeditor
+  [editor]="editor"
+  [config]="{
+    ckfinder: {
+      uploadUrl: 'https://ckeditor.com/apps/ckfinder/3.4.5/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
+      options: {
+        resourceType: 'Images'
+      }
+    }
+  }"
+></ckeditor>

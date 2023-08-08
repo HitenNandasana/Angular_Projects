@@ -1,0 +1,56 @@
+h1,
+h2 {
+    font-family: Lato;
+}
+
+.hidden {
+    display: none;
+}
+
+.container {
+    max-width: 640px;
+    margin: 20px auto;
+}
+
+img {
+    max-width: 100%;
+}
+
+.slider-val-area {
+    width: 50%;
+    padding: 10px 15px 0 10px
+}
+
+.slider-val-area #min-zoom-val {
+    float: left;
+}
+
+.slider-val-area #max-zoom-val {
+    float: right;
+}
+
+img {
+    max-width: 100%;
+    /* This rule is very important, please do not ignore this! */
+}
+
+#canvas {
+    height: 400px;
+    width: 400px;
+    background-color: #ffffff;
+    cursor: default;
+    border: 1px solid black;
+}
+
+.img-container {
+    width: 640px;
+    height: 480px;
+    float: left;
+}
+
+.img-preview {
+    width: 200px;
+    height: 200px;
+    float: left;
+    margin-left: 10px;
+}

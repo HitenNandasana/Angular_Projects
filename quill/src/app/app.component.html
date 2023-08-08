@@ -1,0 +1,16 @@
+<!-- Create the toolbar container -->
+<!-- <div id="toolbar">
+  <button class="ql-bold">Bold</button>
+  <button class="ql-italic">Italic</button>
+</div> -->
+
+<!-- Create the editor container -->
+<!-- <div id="editor">
+  <p>Hello World!</p>
+</div> -->
+
+<quill-editor [(ngModel)]="htmlText"
+  placeholder="Enter Text"
+  [modules]="quillConfig"
+  (onSelectionChanged)="onSelectionChanged($event)"
+  (onContentChanged)="onContentChanged($event)"></quill-editor>

@@ -1,0 +1,8 @@
+<input type="file" (change)="imageSelect($event)">
+
+<div class="img-container">
+    <img #image id="image" [src]="imageSource" crossorigin (load)="init()">
+    <br><br>
+    <button (click)="cropImg()">Crop</button>
+</div>
+<img [src]="CroppedImage" class="img-preview" *ngIf="cropImage">

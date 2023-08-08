@@ -1,39 +1,71 @@
+// table {
+//     width: 100%;
+// }
+
+// .mat-form-field {
+//     font-size: 14px;
+//     display: flex;
+//     justify-content: end;
+// }
+
+// td,
+// th {
+//     width: 25%;
+// }
+
+// th {
+//     color: orange;
+//     font-size: medium;
+//     background-color: ghostwhite;
+// }
+
+// tr,
+// mat-paginator {
+//     background-color: lightgrey;
+// }
+
+// .income {
+//     color: green;
+//     font-weight: 500;
+// }
+
+// .expense {
+//     color: red;
+//     font-weight: 500;
+// }
+
+// .addbtn {
+//     padding-right: 21px;
+// }
+
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
 table {
     width: 100%;
 }
 
-.mat-form-field {
-    font-size: 14px;
-    display: flex;
-    justify-content: end;
+tfoot td {
+    text-align: center;
 }
 
-td,
-th {
-    width: 25%;
+.title {
+    font-size: 20px;
+    text-align: center;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
 }
 
-th {
-    color: orange;
-    font-size: medium;
-    background-color: ghostwhite;
-}
-
-tr,
-mat-paginator {
-    background-color: lightgrey;
-}
-
-.income {
-    color: green;
-    font-weight: 500;
-}
-
-.expense {
-    color: red;
-    font-weight: 500;
-}
-
-.addbtn {
-    padding-right: 21px;
+.logoImg {
+    text-align: center;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    height: 50px;
 }
