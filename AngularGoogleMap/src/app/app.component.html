@@ -1,0 +1,49 @@
+<!-- <google-map height="800px" width="1750px" [center]="center" [zoom]="zoom" (mapClick)="moveMap($event)"
+  (mapMousemove)="move($event)">
+  <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"
+    [options]="markerOptions"></map-marker>
+</google-map> -->
+<div *ngIf="false">
+  <google-map #map height="700px" width="1550px" [center]="center" [zoom]="zoom" (mapMousemove)="move($event)"
+    (mapClick)="closeInfoWindow()">
+    <!-- <map-marker #marker="mapMarker" *ngFor="let markerPosition of markerPositions;let i = index"
+    [label]="markerPosition.label" [position]="markerPosition" [options]="markerOptions"
+    >
+    <map-info-window>{{markerPosition.info}}</map-info-window>
+  </map-marker> -->
+    <!-- <map-info-window>df</map-info-window> -->
+    <map-info-window [options]="infoWindowOptions" *ngIf="infoWindowPosition">
+      <div>{{ infoWindowContent }}
+        <p>{{address}}</p>
+      </div>
+    </map-info-window>
+    <!-- <map-info-window [options]="infoWindowOptions" *ngIf="infoWindowPosition">
+    <div [innerHTML]="infoWindowContent"></div>
+  </map-info-window> -->
+
+  </google-map>
+</div>
+<!-- [options]="{icon: { url:'https://lh3.googleusercontent.com/a/ACg8ocJkcGYfmoOzNbPMnO8R23qZbafJiw_I65JugctzJ9to--nD2A=s88-w28-h28-c-k-no' },draggable: false, zIndex: 100}" -->
+<!-- <div id="directionsPanel"></div> -->
+
+
+<div id="map"></div>
+
+
+
+<!-- <google-map height="400px" width="750px" [center]="center" [zoom]="zoom" (mapClick)="addMarker($event)">
+  <map-marker #marker="mapMarker" *ngFor="let markerPosition of markerPositions" [position]="markerPosition"
+    (mapClick)="openInfoWindow(marker)" label="A"></map-marker>
+  <map-info-window>Info Window content</map-info-window>
+</google-map> -->
+
+<div>Latitude: {{display?.lat}}</div>
+<div>Longitude: {{display?.lng}}</div>
+
+
+<!-- <div #map style="width:100%;height:400px">dfd</div> -->
+<!-- <div #mapContainer class="map-container"></div>
+<button (click)="calculateAndDisplayRoute()">Calculate Route</button> -->
+
+
+<router-outlet></router-outlet>
